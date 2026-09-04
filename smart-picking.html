@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>WAREFLOW - Warehouse Stock &amp; Inventory Management</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-container":"#5c647a","inverse-surface":"#213145","on-primary-fixed":"#002114","on-background":"#0b1c30","on-error":"#ffffff","surface-container-high":"#dce9ff","on-primary-fixed-variant":"#005137","on-surface-variant":"#3d4a42","tertiary-container":"#007bb9","surface-border":"#E2E8F0","secondary":"#565e74","surface-variant":"#d3e4fe","chart-violet":"#8B5CF6","on-surface":"#0b1c30","surface":"#f8f9ff","primary-fixed":"#85f8c4","surface-tint":"#006c4a","critical-red":"#DC2626","surface-dim":"#cbdbf5","tertiary-fixed-dim":"#93ccff","on-tertiary-fixed":"#001d31","on-tertiary-fixed-variant":"#004b73","error":"#ba1a1a","outline-variant":"#bccac0","surface-bright":"#f8f9ff","warning-amber":"#D97706","primary-fixed-dim":"#68dba9","tertiary-fixed":"#cce5ff","error-container":"#ffdad6","inverse-primary":"#68dba9","chart-teal":"#0D9488","surface-canvas":"#F8FAFC","inverse-on-surface":"#eaf1ff","surface-container-low":"#eff4ff","on-primary-container":"#f5fff7","on-tertiary-container":"#fdfcff","surface-subtle":"#F1F5F9","on-secondary-fixed":"#131b2e","surface-container-lowest":"#ffffff","chart-indigo":"#6366F1","surface-container":"#e5eeff","secondary-fixed-dim":"#bec6e0","on-secondary":"#ffffff","on-tertiary":"#ffffff","surface-container-highest":"#d3e4fe","outline":"#6d7a72","primary":"#006948","secondary-container":"#dae2fd","text-secondary":"#1E293B","tertiary":"#006194","secondary-fixed":"#dae2fd","primary-container":"#00855d","text-primary":"#0F172A","on-primary":"#ffffff","critical-red-light":"#FEE2E2","background":"#f8f9ff","warning-amber-light":"#FEF3C7","on-secondary-fixed-variant":"#3f465c","on-error-container":"#93000a","emerald-active":"#10B981"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"gutter-mobile":"0.75rem","space-xs":"0.25rem","space-2xl":"2rem","space-xl":"1.5rem","space-sm":"0.5rem","margin-desktop":"2rem","gutter-desktop":"1.5rem","space-md":"0.75rem","margin-mobile":"1rem","space-2xs":"0.125rem","space-base":"1rem","space-lg":"1.25rem","space-3xl":"3rem"},fontFamily:{"label-code-sm":["JetBrains Mono"],"display-lg":["Plus Jakarta Sans"],"label-code":["JetBrains Mono"],"body-lg":["Inter"],"body-md":["Inter"],"headline-lg":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"tabular-kpi":["Inter"],"body-sm":["Inter"]},fontSize:{"label-code-sm":["10px",{lineHeight:"14px",letterSpacing:"0.05em",fontWeight:"600"}],"display-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-code":["12px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"500"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"headline-lg":["24px",{lineHeight:"32px",letterSpacing:"-0.015em",fontWeight:"600"}],"headline-sm":["16px",{lineHeight:"24px",letterSpacing:"0",fontWeight:"600"}],"headline-md":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"tabular-kpi":["28px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}]}}}};</script></head><body class="bg-surface-canvas font-body-md text-body-md text-text-primary antialiased"><aside class="fixed left-0 top-0 bottom-0 w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-16 px-space-xl flex items-center justify-between bg-surface-container-lowest"><div class="flex items-center gap-space-sm"><img alt="WAREFLOW Brand Logo" class="h-8 w-auto object-contain" src="assets/logo.svg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-text-primary tracking-tight">WAREFLOW</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant uppercase tracking-wider">v2.4 Enterprise Ops</span></div></div></div><div class="px-space-md py-space-sm"><nav class="space-y-space-2xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-xl">
+  <a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-subtle hover:text-on-surface transition-colors duration-150" data-path="dashboard" href="index.html">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">space_dashboard</span>
+      <span class="font-body-md text-body-md font-medium">Dashboard</span>
+    </div>
+  </a>
+  <a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-subtle hover:text-on-surface transition-colors duration-150" data-path="products" href="products.html">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+      <span class="font-body-md text-body-md font-medium">Products</span>
+    </div>
+  </a>
+  <a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-subtle hover:text-on-surface transition-colors duration-150" data-path="orders" href="orders.html">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">local_shipping</span>
+      <span class="font-body-md text-body-md font-medium">Orders</span>
+    </div>
+  </a>
+  <a aria-current="page" class="flex items-center justify-between px-space-md py-space-sm transition-colors duration-150 bg-primary-container text-on-primary-container font-semibold rounded-xl" data-path="smart-picking" href="smart-picking.html">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">barcode_scanner</span>
+      <span class="font-body-md text-body-md font-medium">Smart Picking</span>
+    </div>
+    <span class="font-label-code-sm text-label-code-sm px-space-xs py-space-2xs rounded bg-emerald-active/10 text-primary font-bold uppercase">OPTIMIZED</span>
+  </a>
+  <a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-subtle hover:text-on-surface transition-colors duration-150" data-path="stock-movements" href="index.html#stock-movements">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">swap_horiz</span>
+      <span class="font-body-md text-body-md font-medium">Stock Movements</span>
+    </div>
+  </a>
+  <a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-subtle hover:text-on-surface transition-colors duration-150" data-path="admin-warehouse-hierarchy" href="admin.html">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">corporate_fare</span>
+      <span class="font-body-md text-body-md font-medium">Admin</span>
+    </div>
+  </a>
+</nav></div></div><div class="p-space-md space-y-space-md bg-surface-container-lowest"><div class="p-space-sm rounded-xl bg-surface-subtle"><div class="flex items-start justify-between"><div class="flex flex-col"><span class="font-body-sm text-body-sm font-semibold text-text-primary truncate max-w-[170px]">Warehouse A</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Central Logistics Hub</span></div><span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-primary font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-active"></span>Sync: 2s</span></div></div><div class="p-space-sm rounded-xl bg-surface-subtle space-y-space-xs"><div class="flex justify-between items-center"><span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Storage Capacity</span><span class="font-label-code text-label-code font-bold text-text-primary">86%</span></div><div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden"><div class="h-full bg-primary rounded-full" style="width: 86%"></div></div><div class="flex justify-between items-center font-label-code-sm text-label-code-sm text-on-surface-variant"><span>18,420 / 21,500 Bins</span><span>14% Buffer</span></div></div><div class="p-space-sm rounded-xl bg-surface-subtle flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-active ring-2 ring-surface-container-lowest"></span></div><div class="flex flex-col"><span class="font-body-sm text-body-sm font-semibold text-text-primary leading-tight truncate max-w-[130px]">Marcus Vance</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Warehouse Admin</span></div></div><button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[18px]">expand_more</span></button></div></div></aside><div class="pl-72 flex flex-col min-h-screen"><header class="fixed top-0 right-0 left-72 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 px-space-xl flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-lg flex-1 max-w-xl"><div class="relative w-full max-w-md"><div class="absolute inset-y-0 left-0 pl-space-sm flex items-center pointer-events-none"><span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span></div><input class="w-full pl-9 pr-12 py-space-xs font-body-md text-body-md bg-surface-subtle text-text-primary placeholder:text-on-surface-variant rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Search product, SKU, or bin..." type="text"/><div class="absolute inset-y-0 right-0 pr-space-sm flex items-center"><span class="font-label-code-sm text-label-code-sm px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-medium">⌘K</span></div></div><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-subtle"><span class="material-symbols-outlined text-on-surface-variant text-[18px]">location_city</span><span class="font-label-code text-label-code font-semibold text-text-primary truncate max-w-[180px]">WH-A (East Wing - Fast Pick)</span><span class="material-symbols-outlined text-on-surface-variant text-[16px]">arrow_drop_down</span></div></div><div class="flex items-center gap-space-md"><div class="hidden lg:flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-subtle font-label-code text-label-code text-text-secondary"><span class="material-symbols-outlined text-on-surface-variant text-[18px]">schedule</span><span>Today, Shift 1 (06:00 - 14:30)</span></div><div class="hidden md:flex items-center gap-1.5 px-space-sm py-space-xs rounded-full bg-emerald-active/10 text-primary font-label-code-sm text-label-code-sm font-semibold"><span class="w-2 h-2 rounded-full bg-emerald-active animate-pulse"></span><span>Live Sync 99.98%</span></div><div class="flex items-center gap-space-xs"><button class="px-space-md py-space-xs rounded-lg bg-surface-subtle hover:bg-surface-container-high text-text-primary font-body-md text-body-md font-semibold transition-colors duration-150 flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">pan_tool_alt</span><span>Quick Pick</span></button><button class="px-space-md py-space-xs rounded-lg bg-primary hover:bg-primary-container text-on-primary font-body-md text-body-md font-semibold transition-colors duration-150 flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">add</span><span>New Movement</span></button></div><div class="relative flex items-center justify-center"><button class="w-9 h-9 rounded-lg hover:bg-surface-subtle text-on-surface-variant flex items-center justify-center relative"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-critical-red text-on-error font-label-code-sm text-[9px] flex items-center justify-center font-bold">3</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-surface-canvas flex-1"><div class="flex flex-col w-full">
+<!-- Smart Pick Master Viewport Container -->
+<div class="px-space-xl py-space-xl flex flex-col gap-space-xl max-w-7xl mx-auto w-full">
+<!-- Screen Title & High-Level Context Strip -->
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md">
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-code-sm text-label-code-sm uppercase tracking-widest text-primary font-bold">Heuristic Engine 4.2</span>
+<span class="w-1 h-1 rounded-full bg-secondary"></span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant font-medium">Auto-Routed Dispatch</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-text-primary tracking-tight">Smart Pick Path Optimizer</h1>
+<div class="flex flex-wrap items-center gap-space-sm font-body-md text-body-md text-text-secondary pt-space-2xs">
+<span class="font-semibold text-text-primary">Order: ORD-1042</span>
+<span class="text-on-surface-variant">•</span>
+<span>Customer: <strong class="text-text-primary font-semibold">Rahul Sharma</strong></span>
+<span class="text-on-surface-variant">•</span>
+<span class="px-space-xs py-space-2xs rounded bg-surface-container-high text-tertiary font-label-code-sm text-label-code-sm font-semibold">4 Items Allocated</span>
+</div>
+</div>
+<!-- Algorithmic Indicator Pill -->
+<div class="flex items-center gap-space-sm px-space-md py-space-sm bg-surface-container-lowest shadow-sm rounded-xl">
+<div class="w-9 h-9 rounded-lg bg-emerald-active/10 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">route</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-text-primary font-semibold">TSP Path Optimization Active</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Minimum Warehouse Travel Distance (Savings: 38m)</span>
+</div>
+</div>
+</div>
+<!-- Real-time Progress Bar & Telemetry Banner -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex items-baseline gap-space-sm">
+<span class="font-tabular-kpi text-tabular-kpi text-text-primary font-bold">3 / 4</span>
+<span class="font-headline-sm text-headline-sm text-text-secondary font-medium">items picked</span>
+<span class="px-space-xs py-space-2xs rounded-full bg-emerald-active/10 text-primary font-label-code-sm text-label-code-sm font-bold ml-space-xs">75% COMPLETE</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-xl">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">timer</span>
+<div class="flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant uppercase">Est. Time Left</span>
+<span class="font-headline-sm text-headline-sm text-text-primary font-semibold">2 min 15 sec</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[18px]">nordic_walking</span>
+<div class="flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant uppercase">Distance Traveled</span>
+<span class="font-headline-sm text-headline-sm text-text-primary font-semibold">48m <span class="text-on-surface-variant font-normal">/ 64m total</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Fluid Bar -->
+<div class="w-full h-3 rounded-full bg-surface-subtle overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500 ease-out" style="width: 75%;"></div>
+</div>
+</div>
+<!-- Sequential Route Waypoints -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md overflow-x-auto">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">alt_route</span>
+<h2 class="font-headline-sm text-headline-sm text-text-primary font-semibold">Sequential Waypoint Trajectory</h2>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Optimal Node Sequence: S → A → B → B → C → P</span>
+</div>
+<!-- Connected Path Visualizer Ribbon -->
+<div class="flex items-center min-w-[760px] py-space-sm">
+<!-- Start Point -->
+<div class="flex items-center">
+<div class="flex flex-col items-center gap-space-2xs text-center">
+<div class="w-10 h-10 rounded-full bg-surface-subtle flex items-center justify-center text-text-secondary font-label-code text-label-code font-bold shadow-sm">
+<span class="material-symbols-outlined text-[20px]">door_open</span>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-text-primary font-bold">START</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Zone Inbound</span>
+</div>
+<div class="w-12 h-1 bg-primary"></div>
+</div>
+<!-- Step 1: DONE -->
+<div class="flex items-center">
+<div class="flex flex-col items-center gap-space-2xs text-center">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-code text-label-code font-bold shadow-sm">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<span class="font-label-code text-label-code text-text-primary font-bold">A04</span>
+<span class="font-label-code-sm text-label-code-sm text-primary font-semibold">Row A • 12m</span>
+</div>
+<div class="w-12 h-1 bg-primary"></div>
+</div>
+<!-- Step 2: DONE -->
+<div class="flex items-center">
+<div class="flex flex-col items-center gap-space-2xs text-center">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-code text-label-code font-bold shadow-sm">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<span class="font-label-code text-label-code text-text-primary font-bold">B03</span>
+<span class="font-label-code-sm text-label-code-sm text-primary font-semibold">Row B • 16m</span>
+</div>
+<div class="w-12 h-1 bg-primary"></div>
+</div>
+<!-- Step 3: DONE -->
+<div class="flex items-center">
+<div class="flex flex-col items-center gap-space-2xs text-center">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-code text-label-code font-bold shadow-sm">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<span class="font-label-code text-label-code text-text-primary font-bold">B07</span>
+<span class="font-label-code-sm text-label-code-sm text-primary font-semibold">Row B • 20m</span>
+</div>
+<!-- Transition to active -->
+<div class="w-12 h-1 bg-gradient-to-r from-primary to-emerald-active"></div>
+</div>
+<!-- Step 4: ACTIVE / CURRENT TARGET -->
+<div class="flex items-center">
+<div class="flex flex-col items-center gap-space-2xs text-center relative">
+<div class="relative flex items-center justify-center">
+<span class="absolute inline-flex h-12 w-12 rounded-full bg-emerald-active opacity-40 animate-ping"></span>
+<div class="w-11 h-11 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-code text-label-code font-bold shadow-md relative z-10">
+<span>04</span>
+</div>
+</div>
+<span class="font-label-code text-label-code text-primary font-bold">C02 (NOW)</span>
+<span class="font-label-code-sm text-label-code-sm text-text-primary font-semibold">Row C • Level 2</span>
+</div>
+<div class="w-12 h-1 bg-surface-subtle"></div>
+</div>
+<!-- Step 5: PACKING PENDING -->
+<div class="flex items-center">
+<div class="flex flex-col items-center gap-space-2xs text-center opacity-60">
+<div class="w-10 h-10 rounded-full bg-surface-subtle text-on-surface-variant flex items-center justify-center font-label-code text-label-code font-bold">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+</div>
+<span class="font-label-code text-label-code text-text-primary font-semibold">PACKING</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Station 2</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Workspace Split: Sequence Stack + Floor Telemetry Map -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-xl items-start">
+<!-- Left Column: Step-by-Step Pick Sequence Cards (7 Cols) -->
+<div class="xl:col-span-7 flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-text-primary font-semibold">Pick Sequence Instructions</span>
+<span class="font-label-code-sm text-label-code-sm px-space-xs py-space-2xs rounded bg-surface-subtle text-text-secondary font-medium">Batch ID: #WH-992</span>
+</div>
+<!-- Step 1: COMPLETED -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-start gap-space-md opacity-75 hover:opacity-100 transition-opacity">
+<div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</div>
+<div class="flex flex-col flex-1 gap-space-xs">
+<div class="flex flex-wrap items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-code text-label-code bg-text-primary text-surface-canvas px-2 py-0.5 rounded font-bold tracking-wider">A04</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant font-medium">Row A • Eye Height</span>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-primary font-semibold">Picked 10:38 AM</span>
+</div>
+<div class="flex items-baseline justify-between">
+<h3 class="font-headline-sm text-headline-sm text-text-primary font-semibold">HDMI Cable <span class="font-label-code text-label-code text-text-secondary">× 3</span></h3>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant font-mono">SKU: HD-001</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm pt-space-2xs">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+<span>Picked by Marcus • Barcode scan authenticated (0.8s)</span>
+</div>
+</div>
+</div>
+<!-- Step 2: COMPLETED -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-start gap-space-md opacity-75 hover:opacity-100 transition-opacity">
+<div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</div>
+<div class="flex flex-col flex-1 gap-space-xs">
+<div class="flex flex-wrap items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-code text-label-code bg-text-primary text-surface-canvas px-2 py-0.5 rounded font-bold tracking-wider">B03</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant font-medium">Row B • Ground Level</span>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-primary font-semibold">Picked 10:41 AM</span>
+</div>
+<div class="flex items-baseline justify-between">
+<h3 class="font-headline-sm text-headline-sm text-text-primary font-semibold">Mouse Pad <span class="font-label-code text-label-code text-text-secondary">× 1</span></h3>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant font-mono">SKU: MP-005</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm pt-space-2xs">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+<span>Picked by Marcus • Barcode scan authenticated (1.1s)</span>
+</div>
+</div>
+</div>
+<!-- Step 3: COMPLETED -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-start gap-space-md opacity-75 hover:opacity-100 transition-opacity">
+<div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</div>
+<div class="flex flex-col flex-1 gap-space-xs">
+<div class="flex flex-wrap items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-code text-label-code bg-text-primary text-surface-canvas px-2 py-0.5 rounded font-bold tracking-wider">B07</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant font-medium">Row B • Mid Level</span>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-primary font-semibold">Picked 10:43 AM</span>
+</div>
+<div class="flex items-baseline justify-between">
+<h3 class="font-headline-sm text-headline-sm text-text-primary font-semibold">Wireless Mouse <span class="font-label-code text-label-code text-text-secondary">× 2</span></h3>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant font-mono">SKU: WM-001</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm pt-space-2xs">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+<span>Picked by Marcus • Barcode scan authenticated (0.9s)</span>
+</div>
+</div>
+</div>
+<!-- Step 4: CURRENT ACTIVE TARGET [HERO CARD] -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-md flex flex-col gap-space-md transition-all duration-300" id="target-step-card">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center flex-shrink-0 font-headline-sm text-headline-sm font-bold">
+                4
+              </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-code text-label-code bg-text-primary text-surface-canvas px-2.5 py-0.5 rounded font-bold tracking-wider">BIN: C02</span>
+<span class="font-label-code-sm text-label-code-sm text-primary bg-emerald-active/10 px-2 py-0.5 rounded font-bold uppercase tracking-wide animate-pulse">CURRENT ACTIVE PICK</span>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant pt-0.5">Location: Row C → Shelf Level 2 (Eye-height)</span>
+</div>
+</div>
+<!-- Fast Status Metric Tag -->
+<div class="px-space-sm py-space-xs rounded-lg bg-surface-subtle flex items-center gap-1.5 text-right">
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span>
+<span class="font-label-code-sm text-label-code-sm font-bold text-text-primary">20 IN STOCK</span>
+</div>
+</div>
+<!-- Product Details Hero Split -->
+<div class="flex flex-col md:flex-row gap-space-md p-space-md rounded-xl bg-surface-subtle">
+<!-- Product Visual -->
+<div class="w-full md:w-36 h-28 rounded-lg overflow-hidden bg-surface-container flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="High-angle commercial studio photograph of a premium mechanical keyboard with dark gray tactile keycaps, subtle backlighting, sitting neatly in a clean warehouse bin setting with crisp soft lighting and high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy3UsplSs6ktvudia9egzbh2zF2BeeSSDMaNd-ikJdev3lBSMcCsISY32Uu4457jdfquVClcyUW3EWarQGrMNN-fjfeM8TSp5GNo_T2Zin2V7dpVPxWaTDvlkormt13f2QGZNypJX4bnfweyicn3W2PXBUG7aOiMSzip3hObg9LGCZJSUBCpAeBbsm5_Y-XoKfwKbhkrNJFDGG3RkBJjxXWv4c7_sazmzLI5An917yt8UL1RqJAi4t"/>
+<span class="absolute bottom-1 right-1 font-label-code-sm text-label-code-sm bg-text-primary/80 text-surface-canvas px-1.5 py-0.5 rounded">Level 2</span>
+</div>
+<div class="flex flex-col justify-between flex-1 gap-space-xs">
+<div class="flex flex-col">
+<div class="flex justify-between items-start">
+<h2 class="font-headline-lg text-headline-lg text-text-primary font-bold">Mechanical Keyboard</h2>
+<span class="font-headline-md text-headline-md text-primary font-extrabold bg-emerald-active/10 px-space-sm py-space-2xs rounded-lg">Pick × 1 Unit</span>
+</div>
+<span class="font-label-code text-label-code text-on-surface-variant font-mono">SKU: KB-002 • Barcode: 890432109842</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-md pt-space-xs text-text-secondary font-body-sm text-body-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary">inventory</span>
+<span>Bin Capacity: 20 units loaded</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-warning-amber">scale</span>
+<span>Unit Weight: 1.15 kg</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Barcode Verification Simulation -->
+<div class="flex flex-col gap-space-xs pt-space-2xs">
+<label class="flex justify-between font-label-code-sm text-label-code-sm text-on-surface-variant uppercase font-semibold" for="barcode-input">
+<span>Bin / Item Barcode Verification</span>
+<span class="text-primary font-bold lowercase flex items-center gap-1" id="barcode-status">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-active"></span> ready to scan
+              </span>
+</label>
+<div class="flex flex-col sm:flex-row gap-space-sm items-center">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-[20px] text-on-surface-variant">barcode_scanner</span>
+<input class="w-full pl-10 pr-24 py-2.5 font-label-code text-label-code rounded-lg bg-surface-container-lowest text-text-primary shadow-sm focus:outline-none focus:ring-2 focus:ring-primary" id="barcode-input" placeholder="Scan or enter barcode..." type="text" value="KB-002-C02"/>
+<button class="absolute right-2 top-2 px-space-xs py-1 rounded bg-surface-subtle hover:bg-surface-container text-text-secondary font-label-code-sm text-label-code-sm font-semibold transition-colors" id="btn-quick-fill">
+                  Autofill
+                </button>
+</div>
+<div class="flex items-center gap-space-xs w-full sm:w-auto">
+<button class="flex-1 sm:flex-initial px-space-lg py-2.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-headline-sm text-headline-sm font-semibold shadow-md transition-all active:scale-[0.98] flex items-center justify-center gap-2 whitespace-nowrap" id="btn-confirm-pick">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+<span>Confirm Pick (1 unit)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Operational Fallback / Reporting Row -->
+<div class="flex items-center justify-between pt-space-2xs text-on-surface-variant">
+<span class="font-body-sm text-body-sm">Facing missing stock or damaged packaging?</span>
+<button class="font-label-code-sm text-label-code-sm text-critical-red hover:underline flex items-center gap-1 font-semibold" id="btn-report-bin">
+<span class="material-symbols-outlined text-[16px]">report_problem</span>
+<span>Report Issue with Bin C02</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Interactive Warehouse Mini-Map & Next Action Hub (5 Cols) -->
+<div class="xl:col-span-5 flex flex-col gap-space-md">
+<!-- Warehouse 2D Floor Plan Mini-Map Component -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">grid_view</span>
+<h2 class="font-headline-sm text-headline-sm text-text-primary font-semibold">Warehouse Floor Path (Zone 1)</h2>
+</div>
+<span class="font-label-code-sm text-label-code-sm px-2 py-0.5 rounded bg-emerald-active/10 text-primary font-bold uppercase">LIVE GPS MESH</span>
+</div>
+<!-- Floor SVG Simulation Grid -->
+<div class="relative w-full h-80 rounded-xl bg-surface-subtle p-space-sm flex flex-col justify-between overflow-hidden shadow-inner">
+<!-- Background Aisles & Bins Grid -->
+<svg class="w-full h-full" fill="none" viewbox="0 0 460 300" xmlns="http://www.w3.org/2000/svg">
+<!-- Defs for markers & glows -->
+<defs>
+<filter height="140%" id="glow-emerald" width="140%" x="-20%" y="-20%">
+<fegaussianblur result="glow" stddeviation="3"></fegaussianblur>
+<fecomposite in="SourceGraphic" in2="glow" operator="over"></fecomposite>
+</filter>
+<lineargradient id="routeGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#006948"></stop>
+<stop offset="70%" stop-color="#10B981"></stop>
+<stop offset="100%" stop-color="#85f8c4"></stop>
+</lineargradient>
+</defs>
+<!-- Floor Racks Structure -->
+<!-- Row A -->
+<rect fill="#E2E8F0" height="26" rx="4" width="360" x="50" y="30"></rect>
+<text fill="#64748B" font-family="JetBrains Mono" font-size="11" font-weight="600" x="60" y="48">ROW A (Fast Mover Accessories)</text>
+<rect fill="#006948" height="22" rx="3" width="28" x="140" y="32"></rect>
+<text fill="#ffffff" font-family="JetBrains Mono" font-size="10" font-weight="700" x="145" y="47">A04</text>
+<!-- Row B -->
+<rect fill="#E2E8F0" height="26" rx="4" width="360" x="50" y="90"></rect>
+<text fill="#64748B" font-family="JetBrains Mono" font-size="11" font-weight="600" x="60" y="108">ROW B (Peripherals)</text>
+<rect fill="#006948" height="22" rx="3" width="28" x="110" y="92"></rect>
+<text fill="#ffffff" font-family="JetBrains Mono" font-size="10" font-weight="700" x="115" y="107">B03</text>
+<rect fill="#006948" height="22" rx="3" width="28" x="250" y="92"></rect>
+<text fill="#ffffff" font-family="JetBrains Mono" font-size="10" font-weight="700" x="255" y="107">B07</text>
+<!-- Row C (Active Target Row) -->
+<rect fill="#CBD5E1" height="26" rx="4" width="360" x="50" y="150"></rect>
+<text fill="#1E293B" font-family="JetBrains Mono" font-size="11" font-weight="600" x="60" y="168">ROW C (Keyboards &amp; Hardware)</text>
+<rect fill="#00855d" filter="url(#glow-emerald)" height="22" rx="3" width="32" x="90" y="152"></rect>
+<text fill="#ffffff" font-family="JetBrains Mono" font-size="10" font-weight="700" x="96" y="167">C02</text>
+<!-- Row D -->
+<rect fill="#E2E8F0" height="26" rx="4" width="360" x="50" y="210"></rect>
+<text fill="#64748B" font-family="JetBrains Mono" font-size="11" font-weight="600" x="60" y="228">ROW D (Heavy Storage &amp; Monitors)</text>
+<!-- Special Zones: Inbound & Outbound Packing -->
+<!-- Start Inbound -->
+<rect fill="#F1F5F9" height="250" rx="4" width="24" x="15" y="15"></rect>
+<text fill="#64748B" font-family="JetBrains Mono" font-size="10" font-weight="600" transform="rotate(-90)" x="-160" y="31">INBOUND AISLE</text>
+<!-- Packing Station -->
+<rect fill="#DAE2FD" height="42" rx="6" width="85" x="360" y="245"></rect>
+<text fill="#006194" font-family="JetBrains Mono" font-size="10" font-weight="700" x="370" y="265">PACKING 2</text>
+<text fill="#565e74" font-family="Inter" font-size="9" font-weight="500" x="370" y="278">Station B-04</text>
+<!-- Dynamic Optimized Trajectory Route Path -->
+<!-- Path from Inbound (30, 43) -> A04 (154, 43) -> Down to Row B (154, 75) -> B03 (124, 75) -> to B07 (264, 75) -> Down to Row C (264, 135) -> to C02 (106, 135) -> to Packing (402, 245) -->
+<path d="M 30 43 L 154 43 L 154 75 L 124 75 L 124 103" stroke="#006948" stroke-dasharray="4 2" stroke-linecap="round" stroke-width="3"></path>
+<path d="M 124 103 L 124 135 L 264 135 L 264 103" stroke="#006948" stroke-dasharray="4 2" stroke-linecap="round" stroke-width="3"></path>
+<path d="M 264 103 L 264 135 L 106 135 L 106 163" stroke="#10B981" stroke-linecap="round" stroke-width="3.5"></path>
+<!-- Pending Path towards packing station -->
+<path d="M 106 163 L 106 195 L 340 195 L 402 245" stroke="#94A3B8" stroke-dasharray="6 4" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Picker Realtime Indicator Dot -->
+<g transform="translate(106, 140)">
+<circle class="animate-ping" cx="0" cy="0" fill="#10B981" fill-opacity="0.3" r="10"></circle>
+<circle cx="0" cy="0" fill="#006948" r="6"></circle>
+<circle cx="0" cy="0" fill="#ffffff" r="2.5"></circle>
+</g>
+<text fill="#006948" font-family="JetBrains Mono" font-size="9" font-weight="700" x="120" y="137">Marcus (Current Loc)</text>
+</svg>
+<!-- Mini Map Legend -->
+<div class="absolute bottom-2 left-2 flex items-center gap-space-sm bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-1 rounded-md text-on-surface-variant font-label-code-sm text-label-code-sm shadow-sm">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary"></span> Picked</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-active animate-pulse"></span> Active Bin</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary"></span> Remaining</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary">near_me</span>
+<span>Facing North-East • Aisle clearance clear</span>
+</span>
+<span class="font-label-code-sm text-label-code-sm font-semibold text-text-primary">Zone A-East / Level 2</span>
+</div>
+</div>
+<!-- Next Action Summary Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">forward</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary font-semibold">Immediate Next Hand-off</h3>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex justify-between items-center">
+<span class="font-label-code-sm text-label-code-sm uppercase text-on-surface-variant font-semibold">Destination Station</span>
+<span class="px-space-xs py-space-2xs rounded bg-emerald-active/10 text-primary font-label-code-sm text-label-code-sm font-bold">READY FOR INGEST</span>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-md text-headline-md font-bold text-text-primary">Packing Station 2</span>
+<span class="font-label-code text-label-code text-on-surface-variant">(Bench B-04)</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary pt-space-2xs">
+              Packing slip and protective air-cushion bubble wraps are automatically queued for print at Bench B-04.
+            </p>
+</div>
+<!-- Speed and Efficiency Metric Card -->
+<div class="p-space-md rounded-xl bg-surface-subtle flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">speed</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-semibold text-text-primary leading-tight">
+                Current pick pace: 1.2 min/item
+              </span>
+<span class="font-label-code-sm text-label-code-sm text-primary font-medium">
+                32% faster than warehouse average (1.8m)
+              </span>
+</div>
+</div>
+<!-- Quick Actions & Slip Preview Button -->
+<div class="flex gap-space-sm">
+<button class="flex-1 py-2 px-space-sm rounded-lg bg-surface-subtle hover:bg-surface-container text-text-primary font-body-sm text-body-sm font-semibold transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Reprint Bin Labels</span>
+</button>
+<button class="flex-1 py-2 px-space-sm rounded-lg bg-surface-subtle hover:bg-surface-container text-text-primary font-body-sm text-body-sm font-semibold transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">sync_alt</span>
+<span>Reassign Order</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Warehouse Hardware Device Footer Telemetry Strip -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-wrap items-center justify-between gap-space-md font-label-code-sm text-label-code-sm text-on-surface-variant">
+<div class="flex items-center gap-space-md">
+<span class="flex items-center gap-1 font-semibold text-text-primary">
+<span class="material-symbols-outlined text-[16px] text-primary">wifi</span>
+          AP: WH-SOUTH-MESH-04 (-48 dBm)
+        </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">battery_charging_90</span>
+          Scanner Battery: 91%
+        </span>
+</div>
+<div class="flex items-center gap-space-md">
+<span>Worker Terminal: Zebra TC57-X09</span>
+<span>Firmware: v14.02-ENT</span>
+<span class="text-primary font-bold">System Status: OPERATIONAL</span>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    const confirmBtn = document.getElementById('btn-confirm-pick');
+    const barcodeInput = document.getElementById('barcode-input');
+    const barcodeStatus = document.getElementById('barcode-status');
+    const quickFillBtn = document.getElementById('btn-quick-fill');
+    const targetCard = document.getElementById('target-step-card');
+    const reportBtn = document.getElementById('btn-report-bin');
+
+    if (quickFillBtn && barcodeInput) {
+      quickFillBtn.addEventListener('click', () => {
+        barcodeInput.value = 'KB-002-C02';
+        barcodeStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-active"></span> verified match';
+        barcodeStatus.className = 'text-primary font-bold lowercase flex items-center gap-1';
+      });
+    }
+
+    if (barcodeInput) {
+      barcodeInput.addEventListener('input', (e) => {
+        if (e.target.value.trim().toUpperCase() === 'KB-002-C02') {
+          barcodeStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-active"></span> verified match';
+          barcodeStatus.className = 'text-primary font-bold lowercase flex items-center gap-1';
+        } else {
+          barcodeStatus.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-warning-amber"></span> waiting for scan...';
+          barcodeStatus.className = 'text-warning-amber font-bold lowercase flex items-center gap-1';
+        }
+      });
+    }
+
+    if (confirmBtn) {
+      confirmBtn.addEventListener('click', () => {
+        confirmBtn.disabled = true;
+        confirmBtn.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">refresh</span><span>Verifying &amp; Closing Batch...</span>';
+        confirmBtn.classList.remove('bg-primary');
+        confirmBtn.classList.add('bg-secondary');
+
+        setTimeout(() => {
+          confirmBtn.innerHTML = '<span class="material-symbols-outlined text-[20px]">task_alt</span><span>Route Complete! Proceed to Packing</span>';
+          confirmBtn.classList.remove('bg-secondary');
+          confirmBtn.classList.add('bg-emerald-active');
+          if (targetCard) {
+            targetCard.classList.add('bg-surface-container-low');
+          }
+        }, 1200);
+      });
+    }
+
+    if (reportBtn) {
+      reportBtn.addEventListener('click', () => {
+        const choice = confirm('Initiate rapid stock exception for Bin C02 (Mechanical Keyboard)? An inventory supervisor will be dispatched.');
+        if (choice) {
+          alert('Stock exception logged for Bin C02. Dispatch notification sent to floor team.');
+        }
+      });
+    }
+  })();
+</script></main></div></body></html>

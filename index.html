@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>WAREFLOW - Warehouse Stock &amp; Inventory Management</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-container":"#5c647a","inverse-surface":"#213145","on-primary-fixed":"#002114","on-background":"#0b1c30","on-error":"#ffffff","surface-container-high":"#dce9ff","on-primary-fixed-variant":"#005137","on-surface-variant":"#3d4a42","tertiary-container":"#007bb9","surface-border":"#E2E8F0","secondary":"#565e74","surface-variant":"#d3e4fe","chart-violet":"#8B5CF6","on-surface":"#0b1c30","surface":"#f8f9ff","primary-fixed":"#85f8c4","surface-tint":"#006c4a","critical-red":"#DC2626","surface-dim":"#cbdbf5","tertiary-fixed-dim":"#93ccff","on-tertiary-fixed":"#001d31","on-tertiary-fixed-variant":"#004b73","error":"#ba1a1a","outline-variant":"#bccac0","surface-bright":"#f8f9ff","warning-amber":"#D97706","primary-fixed-dim":"#68dba9","tertiary-fixed":"#cce5ff","error-container":"#ffdad6","inverse-primary":"#68dba9","chart-teal":"#0D9488","surface-canvas":"#F8FAFC","inverse-on-surface":"#eaf1ff","surface-container-low":"#eff4ff","on-primary-container":"#f5fff7","on-tertiary-container":"#fdfcff","surface-subtle":"#F1F5F9","on-secondary-fixed":"#131b2e","surface-container-lowest":"#ffffff","chart-indigo":"#6366F1","surface-container":"#e5eeff","secondary-fixed-dim":"#bec6e0","on-secondary":"#ffffff","on-tertiary":"#ffffff","surface-container-highest":"#d3e4fe","outline":"#6d7a72","primary":"#006948","secondary-container":"#dae2fd","text-secondary":"#1E293B","tertiary":"#006194","secondary-fixed":"#dae2fd","primary-container":"#00855d","text-primary":"#0F172A","on-primary":"#ffffff","critical-red-light":"#FEE2E2","background":"#f8f9ff","warning-amber-light":"#FEF3C7","on-secondary-fixed-variant":"#3f465c","on-error-container":"#93000a","emerald-active":"#10B981"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"gutter-mobile":"0.75rem","space-xs":"0.25rem","space-2xl":"2rem","space-xl":"1.5rem","space-sm":"0.5rem","margin-desktop":"2rem","gutter-desktop":"1.5rem","space-md":"0.75rem","margin-mobile":"1rem","space-2xs":"0.125rem","space-base":"1rem","space-lg":"1.25rem","space-3xl":"3rem"},fontFamily:{"label-code-sm":["JetBrains Mono"],"display-lg":["Plus Jakarta Sans"],"label-code":["JetBrains Mono"],"body-lg":["Inter"],"body-md":["Inter"],"headline-lg":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"tabular-kpi":["Inter"],"body-sm":["Inter"]},fontSize:{"label-code-sm":["10px",{lineHeight:"14px",letterSpacing:"0.05em",fontWeight:"600"}],"display-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-code":["12px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"500"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"headline-lg":["24px",{lineHeight:"32px",letterSpacing:"-0.015em",fontWeight:"600"}],"headline-sm":["16px",{lineHeight:"24px",letterSpacing:"0",fontWeight:"600"}],"headline-md":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"tabular-kpi":["28px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}]}}}};</script></head><body class="bg-surface-canvas font-body-md text-body-md text-text-primary antialiased"><aside class="fixed left-0 top-0 bottom-0 w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-16 px-space-xl flex items-center justify-between bg-surface-container-lowest"><div class="flex items-center gap-space-sm"><img alt="WAREFLOW Brand Logo" class="h-8 w-auto object-contain" src="assets/logo.svg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-text-primary tracking-tight">WAREFLOW</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant uppercase tracking-wider">v2.4 Enterprise Ops</span></div></div></div><div class="px-space-md py-space-sm"><nav class="space-y-space-2xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-xl">
+  <a aria-current="page" class="flex items-center justify-between px-space-md py-space-sm transition-colors duration-150 bg-primary-container text-on-primary-container font-semibold rounded-xl" data-path="dashboard" href="index.html">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">space_dashboard</span>
+      <span class="font-body-md text-body-md font-medium">Dashboard</span>
+    </div>
+  </a>
+  <a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-subtle hover:text-on-surface transition-colors duration-150" data-path="products" href="products.html">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+      <span class="font-body-md text-body-md font-medium">Products</span>
+    </div>
+  </a>
+  <a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-subtle hover:text-on-surface transition-colors duration-150" data-path="orders" href="orders.html">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">local_shipping</span>
+      <span class="font-body-md text-body-md font-medium">Orders</span>
+    </div>
+  </a>
+  <a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-subtle hover:text-on-surface transition-colors duration-150" data-path="smart-picking" href="smart-picking.html">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">barcode_scanner</span>
+      <span class="font-body-md text-body-md font-medium">Smart Picking</span>
+    </div>
+    <span class="font-label-code-sm text-label-code-sm px-space-xs py-space-2xs rounded bg-emerald-active/10 text-primary font-bold uppercase">OPTIMIZED</span>
+  </a>
+  <a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-subtle hover:text-on-surface transition-colors duration-150" data-path="stock-movements" href="index.html#stock-movements">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">swap_horiz</span>
+      <span class="font-body-md text-body-md font-medium">Stock Movements</span>
+    </div>
+  </a>
+  <a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-subtle hover:text-on-surface transition-colors duration-150" data-path="admin-warehouse-hierarchy" href="admin.html">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">corporate_fare</span>
+      <span class="font-body-md text-body-md font-medium">Admin</span>
+    </div>
+  </a>
+</nav></div></div><div class="p-space-md space-y-space-md bg-surface-container-lowest"><div class="p-space-sm rounded-xl bg-surface-subtle"><div class="flex items-start justify-between"><div class="flex flex-col"><span class="font-body-sm text-body-sm font-semibold text-text-primary truncate max-w-[170px]">Warehouse A</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Central Logistics Hub</span></div><span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-primary font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-active"></span>Sync: 2s</span></div></div><div class="p-space-sm rounded-xl bg-surface-subtle space-y-space-xs"><div class="flex justify-between items-center"><span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Storage Capacity</span><span class="font-label-code text-label-code font-bold text-text-primary">86%</span></div><div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden"><div class="h-full bg-primary rounded-full" style="width: 86%"></div></div><div class="flex justify-between items-center font-label-code-sm text-label-code-sm text-on-surface-variant"><span>18,420 / 21,500 Bins</span><span>14% Buffer</span></div></div><div class="p-space-sm rounded-xl bg-surface-subtle flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-active ring-2 ring-surface-container-lowest"></span></div><div class="flex flex-col"><span class="font-body-sm text-body-sm font-semibold text-text-primary leading-tight truncate max-w-[130px]">Marcus Vance</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Warehouse Admin</span></div></div><button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[18px]">expand_more</span></button></div></div></aside><div class="pl-72 flex flex-col min-h-screen"><header class="fixed top-0 right-0 left-72 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 px-space-xl flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-lg flex-1 max-w-xl"><div class="relative w-full max-w-md"><div class="absolute inset-y-0 left-0 pl-space-sm flex items-center pointer-events-none"><span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span></div><input class="w-full pl-9 pr-12 py-space-xs font-body-md text-body-md bg-surface-subtle text-text-primary placeholder:text-on-surface-variant rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Search product, SKU, or bin..." type="text"/><div class="absolute inset-y-0 right-0 pr-space-sm flex items-center"><span class="font-label-code-sm text-label-code-sm px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-medium">⌘K</span></div></div><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-subtle"><span class="material-symbols-outlined text-on-surface-variant text-[18px]">location_city</span><span class="font-label-code text-label-code font-semibold text-text-primary truncate max-w-[180px]">WH-A (East Wing - Fast Pick)</span><span class="material-symbols-outlined text-on-surface-variant text-[16px]">arrow_drop_down</span></div></div><div class="flex items-center gap-space-md"><div class="hidden lg:flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-subtle font-label-code text-label-code text-text-secondary"><span class="material-symbols-outlined text-on-surface-variant text-[18px]">schedule</span><span>Today, Shift 1 (06:00 - 14:30)</span></div><div class="hidden md:flex items-center gap-1.5 px-space-sm py-space-xs rounded-full bg-emerald-active/10 text-primary font-label-code-sm text-label-code-sm font-semibold"><span class="w-2 h-2 rounded-full bg-emerald-active animate-pulse"></span><span>Live Sync 99.98%</span></div><div class="flex items-center gap-space-xs"><button class="px-space-md py-space-xs rounded-lg bg-surface-subtle hover:bg-surface-container-high text-text-primary font-body-md text-body-md font-semibold transition-colors duration-150 flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">pan_tool_alt</span><span>Quick Pick</span></button><button class="px-space-md py-space-xs rounded-lg bg-primary hover:bg-primary-container text-on-primary font-body-md text-body-md font-semibold transition-colors duration-150 flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">add</span><span>New Movement</span></button></div><div class="relative flex items-center justify-center"><button class="w-9 h-9 rounded-lg hover:bg-surface-subtle text-on-surface-variant flex items-center justify-center relative"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-critical-red text-on-error font-label-code-sm text-[9px] flex items-center justify-center font-bold">3</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-surface-canvas flex-1"><div class="flex flex-col w-full p-space-base xl:p-space-2xl space-y-space-xl">
+<!-- TOP CONTROL HEADER & CONTEXT BAR -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Warehouse Overview</span>
+<div class="flex items-center gap-1 px-space-xs py-space-2xs rounded bg-surface-container font-label-code text-label-code text-on-surface-variant font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-active animate-ping"></span>
+<span>WH-01 REALTIME</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">High-velocity telemetry, inventory density, and row allocation metrics.</p>
+</div>
+<!-- Actions & Selectors -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- Warehouse Selector -->
+<div class="relative bg-surface-container-lowest shadow-sm rounded-xl px-space-md py-space-xs flex items-center gap-space-sm cursor-pointer hover:bg-surface-subtle transition-all">
+<span class="material-symbols-outlined text-primary text-[20px]">warehouse</span>
+<div class="flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant uppercase">Facility</span>
+<span class="font-headline-sm text-headline-sm text-text-primary leading-tight">Warehouse A — Central</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span>
+</div>
+<!-- Active Shift Badge -->
+<div class="hidden sm:flex bg-surface-container-lowest shadow-sm rounded-xl px-space-md py-space-xs items-center gap-space-sm">
+<span class="material-symbols-outlined text-tertiary text-[20px]">schedule</span>
+<div class="flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant uppercase">Shift Window</span>
+<span class="font-body-md text-body-md font-semibold text-text-primary">Shift 1 (06:00 - 14:30)</span>
+</div>
+</div>
+<!-- Date Range Filter -->
+<div class="bg-surface-container-lowest shadow-sm rounded-xl px-space-md py-space-xs flex items-center gap-space-sm cursor-pointer hover:bg-surface-subtle transition-all">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">calendar_today</span>
+<span class="font-body-md text-body-md font-medium text-text-secondary">Today, Nov 14</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]">arrow_drop_down</span>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-space-xs rounded-xl bg-surface-container-lowest shadow-sm hover:bg-surface-subtle text-text-primary font-body-md text-body-md font-semibold flex items-center gap-1 transition-all">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+<span>Export</span>
+</button>
+<button class="px-space-md py-space-xs rounded-xl bg-primary hover:bg-primary-container text-on-primary font-body-md text-body-md font-semibold flex items-center gap-1 shadow-sm transition-all">
+<span class="material-symbols-outlined text-[18px]">qr_code_scanner</span>
+<span>Scan Stock</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 5 MAIN KPI CARDS -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-md">
+<!-- 1. Total SKUs -->
+<div class="bg-surface-container-lowest shadow-sm rounded-xl p-space-md flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute -right-2 -bottom-2 w-16 h-16 bg-primary/5 rounded-full pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm uppercase tracking-wider text-on-surface-variant">Catalog Variety</span>
+<div class="w-8 h-8 rounded-lg bg-primary-container/20 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">category</span>
+</div>
+</div>
+<div class="mt-space-sm">
+<span class="font-tabular-kpi text-tabular-kpi text-text-primary tracking-tight">850</span>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-primary text-[16px]">arrow_upward</span>
+<span class="font-label-code text-label-code text-primary font-semibold">+12 this week</span>
+</div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-2 pt-2 border-none">Total SKUs Tracked</span>
+</div>
+<!-- 2. Total Units -->
+<div class="bg-surface-container-lowest shadow-sm rounded-xl p-space-md flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute -right-2 -bottom-2 w-16 h-16 bg-tertiary/5 rounded-full pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm uppercase tracking-wider text-on-surface-variant">Physical Units</span>
+<div class="w-8 h-8 rounded-lg bg-tertiary-container/10 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">layers</span>
+</div>
+</div>
+<div class="mt-space-sm">
+<span class="font-tabular-kpi text-tabular-kpi text-text-primary tracking-tight">12,430</span>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-primary text-[16px]">check_circle</span>
+<span class="font-label-code text-label-code text-text-secondary font-medium">94.2% active bins</span>
+</div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-2 pt-2 border-none">Physical Inventory</span>
+</div>
+<!-- 3. Orders Today -->
+<div class="bg-surface-container-lowest shadow-sm rounded-xl p-space-md flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute -right-2 -bottom-2 w-16 h-16 bg-chart-indigo/5 rounded-full pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm uppercase tracking-wider text-on-surface-variant">Daily Fulfillment</span>
+<div class="w-8 h-8 rounded-lg bg-secondary-container text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+</div>
+</div>
+<div class="mt-space-sm">
+<span class="font-tabular-kpi text-tabular-kpi text-text-primary tracking-tight">137</span>
+<div class="flex items-center gap-1 mt-1 font-label-code text-label-code text-on-surface-variant">
+<span class="font-semibold text-primary">89 Done</span>
+<span>•</span>
+<span class="text-warning-amber font-semibold">48 Pend</span>
+</div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-2 pt-2 border-none">Pick &amp; Dispatch Load</span>
+</div>
+<!-- 4. Low Stock -->
+<div class="bg-surface-container-lowest shadow-sm rounded-xl p-space-md flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden bg-gradient-to-br from-surface-container-lowest via-surface-container-lowest to-warning-amber-light/20">
+<div class="flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm uppercase tracking-wider text-warning-amber font-bold">Restock Required</span>
+<div class="w-8 h-8 rounded-lg bg-warning-amber-light text-warning-amber flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+</div>
+</div>
+<div class="mt-space-sm">
+<div class="flex items-baseline gap-2">
+<span class="font-tabular-kpi text-tabular-kpi text-warning-amber tracking-tight">24</span>
+<span class="font-label-code-sm text-label-code-sm text-warning-amber uppercase font-semibold">SKUs</span>
+</div>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-warning-amber text-[16px]">priority_high</span>
+<span class="font-label-code text-label-code text-text-secondary font-medium">Reorder triggers set</span>
+</div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-2 pt-2 border-none">Under threshold limit</span>
+</div>
+<!-- 5. Critical Stock -->
+<div class="bg-surface-container-lowest shadow-sm rounded-xl p-space-md flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden bg-gradient-to-br from-surface-container-lowest via-surface-container-lowest to-critical-red-light/30">
+<div class="flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm uppercase tracking-wider text-critical-red font-bold">Stockout Risk</span>
+<div class="w-8 h-8 rounded-lg bg-critical-red-light text-critical-red flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">error_outline</span>
+</div>
+</div>
+<div class="mt-space-sm">
+<div class="flex items-baseline gap-2">
+<span class="font-tabular-kpi text-tabular-kpi text-critical-red tracking-tight">8</span>
+<span class="font-label-code-sm text-label-code-sm text-critical-red uppercase font-semibold">SKUs</span>
+</div>
+<div class="flex items-center gap-1 mt-1">
+<span class="w-2 h-2 rounded-full bg-critical-red animate-pulse"></span>
+<span class="font-label-code text-label-code text-critical-red font-semibold">Action Required</span>
+</div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-2 pt-2 border-none">&lt; 3 units available</span>
+</div>
+</div>
+<!-- MID SECTION: CHART & INVENTORY HEALTH -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- BAR CHART: Inventory Availability by Row (8 Cols) -->
+<div class="lg:col-span-8 bg-surface-container-lowest shadow-sm rounded-xl p-space-lg flex flex-col justify-between">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-space-sm">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-md text-headline-md text-text-primary">Inventory Availability by Row</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]" title="Calculated from optical weight sensors &amp; rack scanners">info</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Rack utilization vs. physical unit allocation in active corridors</p>
+</div>
+<!-- Chart Segment Filter Toggle -->
+<div class="flex items-center bg-surface-subtle p-1 rounded-lg">
+<button class="px-space-sm py-0.5 rounded-md font-label-code-sm text-label-code-sm font-semibold bg-surface-container-lowest text-text-primary shadow-xs">All Rows</button>
+<button class="px-space-sm py-0.5 rounded-md font-label-code-sm text-label-code-sm font-medium text-on-surface-variant hover:text-text-primary">High Velocity</button>
+<button class="px-space-sm py-0.5 rounded-md font-label-code-sm text-label-code-sm font-medium text-on-surface-variant hover:text-text-primary">Zone 1</button>
+</div>
+</div>
+<!-- Capacity Legend -->
+<div class="flex items-center gap-space-lg py-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded bg-primary-container"></span>
+<span>Allocated Stock (Healthy)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded bg-warning-amber"></span>
+<span>Near Peak Capacity (&gt;90%)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded bg-surface-container-high"></span>
+<span>Buffer Headroom</span>
+</div>
+</div>
+<!-- Modern Enterprise SVG Bar Chart -->
+<div class="relative w-full h-64 mt-space-md">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 700 240">
+<defs>
+<lineargradient id="healthyGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#00855d"></stop>
+<stop offset="100%" stop-color="#006948"></stop>
+</lineargradient>
+<lineargradient id="amberGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#F59E0B"></stop>
+<stop offset="100%" stop-color="#D97706"></stop>
+</lineargradient>
+</defs>
+<!-- Horizontal Grid Lines -->
+<line stroke="#E2E8F0" stroke-dasharray="3 3" stroke-width="1" x1="40" x2="680" y1="20" y2="20"></line>
+<line stroke="#E2E8F0" stroke-dasharray="3 3" stroke-width="1" x1="40" x2="680" y1="65" y2="65"></line>
+<line stroke="#E2E8F0" stroke-dasharray="3 3" stroke-width="1" x1="40" x2="680" y1="110" y2="110"></line>
+<line stroke="#E2E8F0" stroke-dasharray="3 3" stroke-width="1" x1="40" x2="680" y1="155" y2="155"></line>
+<line stroke="#CBD5E1" stroke-width="1.5" x1="40" x2="680" y1="200" y2="200"></line>
+<!-- Y-Axis Labels -->
+<text class="fill-slate-400 font-label-code-sm text-[10px]" text-anchor="end" x="32" y="24">5,000</text>
+<text class="fill-slate-400 font-label-code-sm text-[10px]" text-anchor="end" x="32" y="69">3,750</text>
+<text class="fill-slate-400 font-label-code-sm text-[10px]" text-anchor="end" x="32" y="114">2,500</text>
+<text class="fill-slate-400 font-label-code-sm text-[10px]" text-anchor="end" x="32" y="159">1,250</text>
+<text class="fill-slate-400 font-label-code-sm text-[10px]" text-anchor="end" x="32" y="204">0</text>
+<!-- BAR 1: Row A (3,200 units, 80%) -->
+<g class="cursor-pointer group">
+<!-- Ghost Max Cap Bar (4,000 Cap) -->
+<rect fill="#eff4ff" height="144" rx="4" width="76" x="80" y="56"></rect>
+<!-- Active Fill Bar (3,200 -> y: 84.8, h: 115.2) -->
+<rect class="group-hover:opacity-90 transition-all" fill="url(#healthyGrad)" height="115" rx="4" width="76" x="80" y="85"></rect>
+<!-- Unit Label Above -->
+<text class="fill-slate-700 font-label-code font-bold text-[11px]" text-anchor="middle" x="118" y="77">3,200</text>
+<!-- X Axis Label -->
+<text class="fill-slate-800 font-headline-sm text-[12px] font-semibold" text-anchor="middle" x="118" y="222">Row A</text>
+<text class="fill-slate-400 font-label-code-sm text-[9px]" text-anchor="middle" x="118" y="235">16 Bins • 80%</text>
+</g>
+<!-- BAR 2: Row B (4,100 units, 95% Peak) -->
+<g class="cursor-pointer group">
+<!-- Ghost Max Cap Bar (4,300 Cap) -->
+<rect fill="#eff4ff" height="155" rx="4" width="76" x="205" y="45"></rect>
+<!-- Active Fill Bar (4,100 -> y: 52.4, h: 147.6) -->
+<rect class="group-hover:opacity-90 transition-all" fill="url(#amberGrad)" height="148" rx="4" width="76" x="205" y="52"></rect>
+<!-- Peak Indicator Badge -->
+<rect fill="#FEF3C7" height="16" rx="4" width="44" x="221" y="26"></rect>
+<text class="fill-amber-800 font-label-code-sm font-bold text-[9px]" text-anchor="middle" x="243" y="38">95% PEAK</text>
+<!-- Unit Label Above -->
+<text class="fill-slate-700 font-label-code font-bold text-[11px]" text-anchor="middle" x="243" y="47">4,100</text>
+<!-- X Axis Label -->
+<text class="fill-slate-800 font-headline-sm text-[12px] font-semibold" text-anchor="middle" x="243" y="222">Row B</text>
+<text class="fill-slate-400 font-label-code-sm text-[9px]" text-anchor="middle" x="243" y="235">18 Bins • 95%</text>
+</g>
+<!-- BAR 3: Row C (2,800 units, 70%) -->
+<g class="cursor-pointer group">
+<!-- Ghost Max Cap Bar (4,000 Cap) -->
+<rect fill="#eff4ff" height="144" rx="4" width="76" x="330" y="56"></rect>
+<!-- Active Fill Bar (2,800 -> y: 99.2, h: 100.8) -->
+<rect class="group-hover:opacity-90 transition-all" fill="url(#healthyGrad)" height="101" rx="4" width="76" x="330" y="99"></rect>
+<!-- Unit Label Above -->
+<text class="fill-slate-700 font-label-code font-bold text-[11px]" text-anchor="middle" x="368" y="91">2,800</text>
+<!-- X Axis Label -->
+<text class="fill-slate-800 font-headline-sm text-[12px] font-semibold" text-anchor="middle" x="368" y="222">Row C</text>
+<text class="fill-slate-400 font-label-code-sm text-[9px]" text-anchor="middle" x="368" y="235">14 Bins • 70%</text>
+</g>
+<!-- BAR 4: Row D (2,300 units, 58%) -->
+<g class="cursor-pointer group">
+<!-- Ghost Max Cap Bar (3,965 Cap) -->
+<rect fill="#eff4ff" height="143" rx="4" width="76" x="455" y="57"></rect>
+<!-- Active Fill Bar (2,300 -> y: 117.2, h: 82.8) -->
+<rect class="group-hover:opacity-90 transition-all" fill="url(#healthyGrad)" height="83" rx="4" width="76" x="455" y="117"></rect>
+<!-- Unit Label Above -->
+<text class="fill-slate-700 font-label-code font-bold text-[11px]" text-anchor="middle" x="493" y="109">2,300</text>
+<!-- X Axis Label -->
+<text class="fill-slate-800 font-headline-sm text-[12px] font-semibold" text-anchor="middle" x="493" y="222">Row D</text>
+<text class="fill-slate-400 font-label-code-sm text-[9px]" text-anchor="middle" x="493" y="235">12 Bins • 58%</text>
+</g>
+<!-- BAR 5: Row E (1,800 units, 45%) -->
+<g class="cursor-pointer group">
+<!-- Ghost Max Cap Bar (4,000 Cap) -->
+<rect fill="#eff4ff" height="144" rx="4" width="76" x="580" y="56"></rect>
+<!-- Active Fill Bar (1,800 -> y: 135.2, h: 64.8) -->
+<rect class="group-hover:opacity-90 transition-all" fill="url(#healthyGrad)" height="65" rx="4" width="76" x="580" y="135"></rect>
+<!-- Unit Label Above -->
+<text class="fill-slate-700 font-label-code font-bold text-[11px]" text-anchor="middle" x="618" y="127">1,800</text>
+<!-- X Axis Label -->
+<text class="fill-slate-800 font-headline-sm text-[12px] font-semibold" text-anchor="middle" x="618" y="222">Row E</text>
+<text class="fill-slate-400 font-label-code-sm text-[9px]" text-anchor="middle" x="618" y="235">10 Bins • 45%</text>
+</g>
+</svg>
+</div>
+<!-- Footer Micro-Metrics -->
+<div class="flex flex-wrap items-center justify-between pt-space-md border-t border-surface-border text-on-surface-variant font-label-code-sm text-label-code-sm">
+<span>Fast-pick bays: Rows A &amp; B (Electronics &amp; Peripherals)</span>
+<span class="text-text-primary font-semibold">Bay Throughput Index: 98.4% On Schedule</span>
+</div>
+</div>
+<!-- INVENTORY HEALTH & SEGMENT DISTRIBUTION (4 Cols) -->
+<div class="lg:col-span-4 bg-surface-container-lowest shadow-sm rounded-xl p-space-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-headline-md text-headline-md text-text-primary">Inventory Health</span>
+<span class="font-label-code-sm text-label-code-sm px-2 py-0.5 rounded-full bg-emerald-active/10 text-primary font-bold">OPERATIONAL</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Threshold health evaluation across all stored SKUs</p>
+<!-- Circular Graphic / Radial Ring Overview -->
+<div class="flex items-center justify-center my-space-lg relative">
+<svg class="w-44 h-44 transform -rotate-90" viewbox="0 0 160 160">
+<!-- Background track -->
+<circle cx="80" cy="80" fill="transparent" r="66" stroke="#f1f5f9" stroke-width="14"></circle>
+<!-- Healthy Arc (85.2% -> 352px of 414px) -->
+<circle cx="80" cy="80" fill="transparent" r="66" stroke="#00855d" stroke-dasharray="414" stroke-dashoffset="61" stroke-linecap="round" stroke-width="14"></circle>
+<!-- Low Stock Arc (9.6% -> 40px) -->
+<circle class="opacity-90" cx="80" cy="80" fill="transparent" r="66" stroke="#D97706" stroke-dasharray="414" stroke-dashoffset="374" stroke-width="14"></circle>
+<!-- Critical Arc (2.8% -> 12px) -->
+<circle class="opacity-90" cx="80" cy="80" fill="transparent" r="66" stroke="#DC2626" stroke-dasharray="414" stroke-dashoffset="402" stroke-width="14"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+<span class="font-tabular-kpi text-tabular-kpi text-text-primary">85.2%</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant uppercase">Optimal</span>
+</div>
+</div>
+<!-- Breakdown List -->
+<div class="space-y-space-sm">
+<!-- Healthy -->
+<div class="p-space-sm rounded-xl bg-surface-subtle flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-text-primary text-[14px]">Healthy Stock</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Sufficient velocity buffer</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-code text-label-code font-bold text-text-primary">724 SKUs</span>
+<span class="block font-label-code-sm text-label-code-sm text-primary">85.2%</span>
+</div>
+</div>
+<!-- Low Stock -->
+<div class="p-space-sm rounded-xl bg-warning-amber-light/30 flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-warning-amber"></span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-warning-amber text-[14px]">Low Stock</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Approaching safety stock</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-code text-label-code font-bold text-warning-amber">82 SKUs</span>
+<span class="block font-label-code-sm text-label-code-sm text-warning-amber font-semibold">9.6%</span>
+</div>
+</div>
+<!-- Critical -->
+<div class="p-space-sm rounded-xl bg-critical-red-light/40 flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-critical-red"></span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-critical-red text-[14px]">Critical Stock</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Stockout imminent</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-code text-label-code font-bold text-critical-red">24 SKUs</span>
+<span class="block font-label-code-sm text-label-code-sm text-critical-red font-semibold">2.8%</span>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-space-md py-space-xs rounded-xl bg-surface-subtle hover:bg-surface-container-high text-text-primary font-body-md text-body-md font-semibold transition-all flex items-center justify-center gap-1">
+<span>Run Auto-Procurement Audit</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- LOWER SECTION: LOW STOCK ALERTS & RECENT MOVEMENTS -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- LOW STOCK ALERTS (5 Cols) -->
+<div class="lg:col-span-5 bg-surface-container-lowest shadow-sm rounded-xl p-space-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-warning-amber text-[22px]">notification_important</span>
+<span class="font-headline-md text-headline-md text-text-primary">Actionable Alerts</span>
+</div>
+<span class="font-label-code-sm text-label-code-sm px-2 py-0.5 rounded bg-critical-red-light text-critical-red font-bold">4 PRIORITY</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Real-time bin sensors triggered reorder levels</p>
+<!-- Alert Cards Stack -->
+<div class="space-y-space-sm">
+<!-- Alert 1: USB-C Cable -->
+<div class="p-space-sm rounded-xl bg-surface-subtle hover:bg-surface-container-low transition-colors">
+<div class="flex items-start justify-between gap-space-xs">
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-[14px] text-text-primary">USB-C Cable</span>
+<span class="font-label-code-sm text-label-code-sm px-1.5 py-0.2 rounded bg-surface-container-highest text-on-surface-variant">CB-089</span>
+</div>
+<div class="mt-1 flex items-center gap-1.5 font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">pin_drop</span>
+<span class="font-semibold text-text-secondary">WH-A → Row B → Bin B03</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[11px] font-label-code-sm font-bold bg-warning-amber-light text-warning-amber">LOW STOCK</span>
+</div>
+<div class="flex items-center justify-between mt-space-sm pt-space-xs border-t border-surface-border">
+<div class="font-label-code text-label-code">
+<span class="text-warning-amber font-bold">4</span>
+<span class="text-on-surface-variant">/ 10 Reorder Min</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="px-space-xs py-0.5 rounded bg-surface-container-lowest shadow-2xs hover:bg-white text-text-primary font-body-sm text-body-sm font-semibold">Inspect</button>
+<button class="px-space-sm py-0.5 rounded bg-primary text-on-primary font-body-sm text-body-sm font-semibold hover:bg-primary-container">Create PO</button>
+</div>
+</div>
+</div>
+<!-- Alert 2: Keyboard Pro -->
+<div class="p-space-sm rounded-xl bg-critical-red-light/20 hover:bg-critical-red-light/30 transition-colors">
+<div class="flex items-start justify-between gap-space-xs">
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-[14px] text-text-primary">Keyboard Pro</span>
+<span class="font-label-code-sm text-label-code-sm px-1.5 py-0.2 rounded bg-surface-container-highest text-on-surface-variant">KB-002</span>
+</div>
+<div class="mt-1 flex items-center gap-1.5 font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">pin_drop</span>
+<span class="font-semibold text-text-secondary">WH-A → Row C → Bin C07</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[11px] font-label-code-sm font-bold bg-critical-red text-on-error animate-pulse">CRITICAL</span>
+</div>
+<div class="flex items-center justify-between mt-space-sm pt-space-xs border-t border-critical-red/20">
+<div class="font-label-code text-label-code">
+<span class="text-critical-red font-bold">3</span>
+<span class="text-on-surface-variant">/ 10 Reorder Min</span>
+</div>
+<button class="px-space-sm py-0.5 rounded bg-critical-red text-on-error font-body-sm text-body-sm font-semibold hover:opacity-90">Emergency Restock</button>
+</div>
+</div>
+<!-- Alert 3: Ergonomic Mouse -->
+<div class="p-space-sm rounded-xl bg-surface-subtle hover:bg-surface-container-low transition-colors">
+<div class="flex items-start justify-between gap-space-xs">
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-[14px] text-text-primary">Ergonomic Mouse</span>
+<span class="font-label-code-sm text-label-code-sm px-1.5 py-0.2 rounded bg-surface-container-highest text-on-surface-variant">WM-004</span>
+</div>
+<div class="mt-1 flex items-center gap-1.5 font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">pin_drop</span>
+<span class="font-semibold text-text-secondary">WH-A → Row B → Bin B09</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[11px] font-label-code-sm font-bold bg-warning-amber-light text-warning-amber">LOW STOCK</span>
+</div>
+<div class="flex items-center justify-between mt-space-sm pt-space-xs border-t border-surface-border">
+<div class="font-label-code text-label-code">
+<span class="text-warning-amber font-bold">5</span>
+<span class="text-on-surface-variant">/ 15 Reorder Min</span>
+</div>
+<button class="px-space-sm py-0.5 rounded bg-primary text-on-primary font-body-sm text-body-sm font-semibold hover:bg-primary-container">Restock</button>
+</div>
+</div>
+<!-- Alert 4: DisplayPort Adapter -->
+<div class="p-space-sm rounded-xl bg-critical-red-light/20 hover:bg-critical-red-light/30 transition-colors">
+<div class="flex items-start justify-between gap-space-xs">
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-[14px] text-text-primary">DisplayPort Adapter</span>
+<span class="font-label-code-sm text-label-code-sm px-1.5 py-0.2 rounded bg-surface-container-highest text-on-surface-variant">DP-012</span>
+</div>
+<div class="mt-1 flex items-center gap-1.5 font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">pin_drop</span>
+<span class="font-semibold text-text-secondary">WH-A → Row A → Bin A02</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[11px] font-label-code-sm font-bold bg-critical-red text-on-error">CRITICAL</span>
+</div>
+<div class="flex items-center justify-between mt-space-sm pt-space-xs border-t border-critical-red/20">
+<div class="font-label-code text-label-code">
+<span class="text-critical-red font-bold">2</span>
+<span class="text-on-surface-variant">/ 12 Reorder Min</span>
+</div>
+<button class="px-space-sm py-0.5 rounded bg-critical-red text-on-error font-body-sm text-body-sm font-semibold hover:opacity-90">Emergency Restock</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between pt-space-xs">
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Automated supplier webhook active</span>
+<a class="font-label-code text-label-code text-primary font-bold hover:underline flex items-center gap-0.5" href="#">
+<span>View All 32 Alerts</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</a>
+</div>
+</div>
+<!-- RECENT STOCK MOVEMENTS TABLE (7 Cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest shadow-sm rounded-xl p-space-lg flex flex-col justify-between overflow-hidden" id="stock-movements">
+<div>
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">swap_horiz</span>
+<span class="font-headline-md text-headline-md text-text-primary">Recent Stock Movements</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1 rounded hover:bg-surface-subtle text-on-surface-variant" title="Filter movements">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-subtle text-on-surface-variant" title="Refresh stream">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+</button>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Live inbound, outbound, and internal bin-to-bin transfers</p>
+<!-- Table Responsive Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-surface-border text-on-surface-variant font-label-code-sm text-label-code-sm uppercase">
+<th class="py-space-xs px-space-sm font-semibold">Time</th>
+<th class="py-space-xs px-space-sm font-semibold">Product &amp; SKU</th>
+<th class="py-space-xs px-space-sm font-semibold">Type</th>
+<th class="py-space-xs px-space-sm font-semibold">Location</th>
+<th class="py-space-xs px-space-sm font-semibold text-right">Qty</th>
+<th class="py-space-xs px-space-sm font-semibold text-right">Ref</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md divide-y divide-surface-border">
+<!-- Movement 1 -->
+<tr class="hover:bg-surface-subtle transition-colors group">
+<td class="py-space-sm px-space-sm font-label-code-sm text-label-code-sm text-on-surface-variant whitespace-nowrap">10:42 AM</td>
+<td class="py-space-sm px-space-sm">
+<div class="font-semibold text-text-primary text-[13px] leading-tight">Wireless Mouse</div>
+<div class="font-label-code-sm text-label-code-sm text-on-surface-variant">WM-001</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="px-2 py-0.5 rounded-full font-label-code-sm text-[10px] font-bold bg-surface-container-high text-tertiary uppercase">OUTWARD</span>
+</td>
+<td class="py-space-sm px-space-sm font-label-code text-label-code text-text-secondary whitespace-nowrap">
+<span class="px-1.5 py-0.5 rounded bg-surface-subtle text-[11px] font-semibold">WH-A &gt; Row B &gt; B07</span>
+</td>
+<td class="py-space-sm px-space-sm text-right font-label-code text-label-code font-bold text-critical-red whitespace-nowrap">-2</td>
+<td class="py-space-sm px-space-sm text-right font-label-code-sm text-label-code-sm text-on-surface-variant whitespace-nowrap">ORD-1042</td>
+</tr>
+<!-- Movement 2 -->
+<tr class="hover:bg-surface-subtle transition-colors group">
+<td class="py-space-sm px-space-sm font-label-code-sm text-label-code-sm text-on-surface-variant whitespace-nowrap">10:55 AM</td>
+<td class="py-space-sm px-space-sm">
+<div class="font-semibold text-text-primary text-[13px] leading-tight">Mechanical Keyboard</div>
+<div class="font-label-code-sm text-label-code-sm text-on-surface-variant">KB-002</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="px-2 py-0.5 rounded-full font-label-code-sm text-[10px] font-bold bg-warning-amber-light text-warning-amber uppercase">TRANSFER</span>
+</td>
+<td class="py-space-sm px-space-sm font-label-code text-label-code text-text-secondary whitespace-nowrap">
+<span class="px-1.5 py-0.5 rounded bg-surface-subtle text-[11px] font-semibold">WH-A &gt; C02 → C04</span>
+</td>
+<td class="py-space-sm px-space-sm text-right font-label-code text-label-code font-bold text-text-primary whitespace-nowrap">20</td>
+<td class="py-space-sm px-space-sm text-right font-label-code-sm text-label-code-sm text-on-surface-variant whitespace-nowrap">TRF-021</td>
+</tr>
+<!-- Movement 3 -->
+<tr class="hover:bg-surface-subtle transition-colors group">
+<td class="py-space-sm px-space-sm font-label-code-sm text-label-code-sm text-on-surface-variant whitespace-nowrap">11:03 AM</td>
+<td class="py-space-sm px-space-sm">
+<div class="font-semibold text-text-primary text-[13px] leading-tight">HDMI 4K Cable</div>
+<div class="font-label-code-sm text-label-code-sm text-on-surface-variant">HD-001</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="px-2 py-0.5 rounded-full font-label-code-sm text-[10px] font-bold bg-emerald-active/10 text-primary uppercase">INWARD</span>
+</td>
+<td class="py-space-sm px-space-sm font-label-code text-label-code text-text-secondary whitespace-nowrap">
+<span class="px-1.5 py-0.5 rounded bg-surface-subtle text-[11px] font-semibold">WH-A &gt; Row A &gt; A04</span>
+</td>
+<td class="py-space-sm px-space-sm text-right font-label-code text-label-code font-bold text-primary whitespace-nowrap">+100</td>
+<td class="py-space-sm px-space-sm text-right font-label-code-sm text-label-code-sm text-on-surface-variant whitespace-nowrap">PO-108</td>
+</tr>
+<!-- Movement 4 -->
+<tr class="hover:bg-surface-subtle transition-colors group">
+<td class="py-space-sm px-space-sm font-label-code-sm text-label-code-sm text-on-surface-variant whitespace-nowrap">11:15 AM</td>
+<td class="py-space-sm px-space-sm">
+<div class="font-semibold text-text-primary text-[13px] leading-tight">USB-C Multi-Hub</div>
+<div class="font-label-code-sm text-label-code-sm text-on-surface-variant">UB-305</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="px-2 py-0.5 rounded-full font-label-code-sm text-[10px] font-bold bg-surface-container-high text-tertiary uppercase">OUTWARD</span>
+</td>
+<td class="py-space-sm px-space-sm font-label-code text-label-code text-text-secondary whitespace-nowrap">
+<span class="px-1.5 py-0.5 rounded bg-surface-subtle text-[11px] font-semibold">WH-A &gt; Row B &gt; B03</span>
+</td>
+<td class="py-space-sm px-space-sm text-right font-label-code text-label-code font-bold text-critical-red whitespace-nowrap">-5</td>
+<td class="py-space-sm px-space-sm text-right font-label-code-sm text-label-code-sm text-on-surface-variant whitespace-nowrap">ORD-1048</td>
+</tr>
+<!-- Movement 5 -->
+<tr class="hover:bg-surface-subtle transition-colors group">
+<td class="py-space-sm px-space-sm font-label-code-sm text-label-code-sm text-on-surface-variant whitespace-nowrap">11:28 AM</td>
+<td class="py-space-sm px-space-sm">
+<div class="font-semibold text-text-primary text-[13px] leading-tight">Heavy Duty Power Strip</div>
+<div class="font-label-code-sm text-label-code-sm text-on-surface-variant">PS-902</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="px-2 py-0.5 rounded-full font-label-code-sm text-[10px] font-bold bg-emerald-active/10 text-primary uppercase">INWARD</span>
+</td>
+<td class="py-space-sm px-space-sm font-label-code text-label-code text-text-secondary whitespace-nowrap">
+<span class="px-1.5 py-0.5 rounded bg-surface-subtle text-[11px] font-semibold">WH-A &gt; Row D &gt; D01</span>
+</td>
+<td class="py-space-sm px-space-sm text-right font-label-code text-label-code font-bold text-primary whitespace-nowrap">+50</td>
+<td class="py-space-sm px-space-sm text-right font-label-code-sm text-label-code-sm text-on-surface-variant whitespace-nowrap">PO-109</td>
+</tr>
+<!-- Movement 6 -->
+<tr class="hover:bg-surface-subtle transition-colors group">
+<td class="py-space-sm px-space-sm font-label-code-sm text-label-code-sm text-on-surface-variant whitespace-nowrap">11:34 AM</td>
+<td class="py-space-sm px-space-sm">
+<div class="font-semibold text-text-primary text-[13px] leading-tight">Bluetooth Headset</div>
+<div class="font-label-code-sm text-label-code-sm text-on-surface-variant">BH-110</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="px-2 py-0.5 rounded-full font-label-code-sm text-[10px] font-bold bg-warning-amber-light text-warning-amber uppercase">TRANSFER</span>
+</td>
+<td class="py-space-sm px-space-sm font-label-code text-label-code text-text-secondary whitespace-nowrap">
+<span class="px-1.5 py-0.5 rounded bg-surface-subtle text-[11px] font-semibold">WH-A &gt; A01 → A05</span>
+</td>
+<td class="py-space-sm px-space-sm text-right font-label-code text-label-code font-bold text-text-primary whitespace-nowrap">15</td>
+<td class="py-space-sm px-space-sm text-right font-label-code-sm text-label-code-sm text-on-surface-variant whitespace-nowrap">TRF-022</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between pt-space-xs border-t border-surface-border">
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Showing latest 6 of 312 records today</span>
+<a class="font-label-code text-label-code text-primary font-bold hover:underline flex items-center gap-0.5" href="#">
+<span>Complete Audit Log</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

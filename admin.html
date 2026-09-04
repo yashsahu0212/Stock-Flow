@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>WAREFLOW - Warehouse Stock &amp; Inventory Management</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-container":"#5c647a","inverse-surface":"#213145","on-primary-fixed":"#002114","on-background":"#0b1c30","on-error":"#ffffff","surface-container-high":"#dce9ff","on-primary-fixed-variant":"#005137","on-surface-variant":"#3d4a42","tertiary-container":"#007bb9","surface-border":"#E2E8F0","secondary":"#565e74","surface-variant":"#d3e4fe","chart-violet":"#8B5CF6","on-surface":"#0b1c30","surface":"#f8f9ff","primary-fixed":"#85f8c4","surface-tint":"#006c4a","critical-red":"#DC2626","surface-dim":"#cbdbf5","tertiary-fixed-dim":"#93ccff","on-tertiary-fixed":"#001d31","on-tertiary-fixed-variant":"#004b73","error":"#ba1a1a","outline-variant":"#bccac0","surface-bright":"#f8f9ff","warning-amber":"#D97706","primary-fixed-dim":"#68dba9","tertiary-fixed":"#cce5ff","error-container":"#ffdad6","inverse-primary":"#68dba9","chart-teal":"#0D9488","surface-canvas":"#F8FAFC","inverse-on-surface":"#eaf1ff","surface-container-low":"#eff4ff","on-primary-container":"#f5fff7","on-tertiary-container":"#fdfcff","surface-subtle":"#F1F5F9","on-secondary-fixed":"#131b2e","surface-container-lowest":"#ffffff","chart-indigo":"#6366F1","surface-container":"#e5eeff","secondary-fixed-dim":"#bec6e0","on-secondary":"#ffffff","on-tertiary":"#ffffff","surface-container-highest":"#d3e4fe","outline":"#6d7a72","primary":"#006948","secondary-container":"#dae2fd","text-secondary":"#1E293B","tertiary":"#006194","secondary-fixed":"#dae2fd","primary-container":"#00855d","text-primary":"#0F172A","on-primary":"#ffffff","critical-red-light":"#FEE2E2","background":"#f8f9ff","warning-amber-light":"#FEF3C7","on-secondary-fixed-variant":"#3f465c","on-error-container":"#93000a","emerald-active":"#10B981"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"gutter-mobile":"0.75rem","space-xs":"0.25rem","space-2xl":"2rem","space-xl":"1.5rem","space-sm":"0.5rem","margin-desktop":"2rem","gutter-desktop":"1.5rem","space-md":"0.75rem","margin-mobile":"1rem","space-2xs":"0.125rem","space-base":"1rem","space-lg":"1.25rem","space-3xl":"3rem"},fontFamily:{"label-code-sm":["JetBrains Mono"],"display-lg":["Plus Jakarta Sans"],"label-code":["JetBrains Mono"],"body-lg":["Inter"],"body-md":["Inter"],"headline-lg":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"tabular-kpi":["Inter"],"body-sm":["Inter"]},fontSize:{"label-code-sm":["10px",{lineHeight:"14px",letterSpacing:"0.05em",fontWeight:"600"}],"display-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-code":["12px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"500"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"headline-lg":["24px",{lineHeight:"32px",letterSpacing:"-0.015em",fontWeight:"600"}],"headline-sm":["16px",{lineHeight:"24px",letterSpacing:"0",fontWeight:"600"}],"headline-md":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"tabular-kpi":["28px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}]}}}};</script></head><body class="bg-surface-canvas font-body-md text-body-md text-text-primary antialiased"><aside class="fixed left-0 top-0 bottom-0 w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-16 px-space-xl flex items-center justify-between bg-surface-container-lowest"><div class="flex items-center gap-space-sm"><img alt="WAREFLOW Brand Logo" class="h-8 w-auto object-contain" src="assets/logo.svg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-text-primary tracking-tight">WAREFLOW</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant uppercase tracking-wider">v2.4 Enterprise Ops</span></div></div></div><div class="px-space-md py-space-sm"><nav class="space-y-space-2xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-xl">
+  <a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-subtle hover:text-on-surface transition-colors duration-150" data-path="dashboard" href="index.html">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">space_dashboard</span>
+      <span class="font-body-md text-body-md font-medium">Dashboard</span>
+    </div>
+  </a>
+  <a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-subtle hover:text-on-surface transition-colors duration-150" data-path="products" href="products.html">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+      <span class="font-body-md text-body-md font-medium">Products</span>
+    </div>
+  </a>
+  <a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-subtle hover:text-on-surface transition-colors duration-150" data-path="orders" href="orders.html">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">local_shipping</span>
+      <span class="font-body-md text-body-md font-medium">Orders</span>
+    </div>
+  </a>
+  <a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-subtle hover:text-on-surface transition-colors duration-150" data-path="smart-picking" href="smart-picking.html">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">barcode_scanner</span>
+      <span class="font-body-md text-body-md font-medium">Smart Picking</span>
+    </div>
+    <span class="font-label-code-sm text-label-code-sm px-space-xs py-space-2xs rounded bg-emerald-active/10 text-primary font-bold uppercase">OPTIMIZED</span>
+  </a>
+  <a class="flex items-center justify-between px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-subtle hover:text-on-surface transition-colors duration-150" data-path="stock-movements" href="index.html#stock-movements">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">swap_horiz</span>
+      <span class="font-body-md text-body-md font-medium">Stock Movements</span>
+    </div>
+  </a>
+  <a aria-current="page" class="flex items-center justify-between px-space-md py-space-sm transition-colors duration-150 bg-primary-container text-on-primary-container font-semibold rounded-xl" data-path="admin-warehouse-hierarchy" href="admin.html">
+    <div class="flex items-center gap-space-md">
+      <span class="material-symbols-outlined text-[20px]">corporate_fare</span>
+      <span class="font-body-md text-body-md font-medium">Admin</span>
+    </div>
+  </a>
+</nav></div></div><div class="p-space-md space-y-space-md bg-surface-container-lowest"><div class="p-space-sm rounded-xl bg-surface-subtle"><div class="flex items-start justify-between"><div class="flex flex-col"><span class="font-body-sm text-body-sm font-semibold text-text-primary truncate max-w-[170px]">Warehouse A</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Central Logistics Hub</span></div><span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-primary font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-active"></span>Sync: 2s</span></div></div><div class="p-space-sm rounded-xl bg-surface-subtle space-y-space-xs"><div class="flex justify-between items-center"><span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Storage Capacity</span><span class="font-label-code text-label-code font-bold text-text-primary">86%</span></div><div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden"><div class="h-full bg-primary rounded-full" style="width: 86%"></div></div><div class="flex justify-between items-center font-label-code-sm text-label-code-sm text-on-surface-variant"><span>18,420 / 21,500 Bins</span><span>14% Buffer</span></div></div><div class="p-space-sm rounded-xl bg-surface-subtle flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-active ring-2 ring-surface-container-lowest"></span></div><div class="flex flex-col"><span class="font-body-sm text-body-sm font-semibold text-text-primary leading-tight truncate max-w-[130px]">Marcus Vance</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Warehouse Admin</span></div></div><button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[18px]">expand_more</span></button></div></div></aside><div class="pl-72 flex flex-col min-h-screen"><header class="fixed top-0 right-0 left-72 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 px-space-xl flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-lg flex-1 max-w-xl"><div class="relative w-full max-w-md"><div class="absolute inset-y-0 left-0 pl-space-sm flex items-center pointer-events-none"><span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span></div><input class="w-full pl-9 pr-12 py-space-xs font-body-md text-body-md bg-surface-subtle text-text-primary placeholder:text-on-surface-variant rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Search product, SKU, or bin..." type="text"/><div class="absolute inset-y-0 right-0 pr-space-sm flex items-center"><span class="font-label-code-sm text-label-code-sm px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-medium">⌘K</span></div></div><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-subtle"><span class="material-symbols-outlined text-on-surface-variant text-[18px]">location_city</span><span class="font-label-code text-label-code font-semibold text-text-primary truncate max-w-[180px]">WH-A (East Wing - Fast Pick)</span><span class="material-symbols-outlined text-on-surface-variant text-[16px]">arrow_drop_down</span></div></div><div class="flex items-center gap-space-md"><div class="hidden lg:flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-subtle font-label-code text-label-code text-text-secondary"><span class="material-symbols-outlined text-on-surface-variant text-[18px]">schedule</span><span>Today, Shift 1 (06:00 - 14:30)</span></div><div class="hidden md:flex items-center gap-1.5 px-space-sm py-space-xs rounded-full bg-emerald-active/10 text-primary font-label-code-sm text-label-code-sm font-semibold"><span class="w-2 h-2 rounded-full bg-emerald-active animate-pulse"></span><span>Live Sync 99.98%</span></div><div class="flex items-center gap-space-xs"><button class="px-space-md py-space-xs rounded-lg bg-surface-subtle hover:bg-surface-container-high text-text-primary font-body-md text-body-md font-semibold transition-colors duration-150 flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">pan_tool_alt</span><span>Quick Pick</span></button><button class="px-space-md py-space-xs rounded-lg bg-primary hover:bg-primary-container text-on-primary font-body-md text-body-md font-semibold transition-colors duration-150 flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">add</span><span>New Movement</span></button></div><div class="relative flex items-center justify-center"><button class="w-9 h-9 rounded-lg hover:bg-surface-subtle text-on-surface-variant flex items-center justify-center relative"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-critical-red text-on-error font-label-code-sm text-[9px] flex items-center justify-center font-bold">3</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-surface-canvas flex-1"><div class="flex flex-col w-full">
+<!-- Top Command & Facility Sub-header -->
+<div class="px-space-xl py-space-lg bg-surface-container-lowest shadow-sm flex flex-col xl:flex-row xl:items-center xl:justify-between gap-space-md">
+<div class="space-y-space-2xs">
+<div class="flex items-center gap-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant uppercase tracking-wider">
+<span class="inline-block w-2 h-2 rounded-full bg-emerald-active"></span>
+<span>Operational Hierarchy Engine</span>
+<span>•</span>
+<span>Topology Spec v3.1</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">
+        Warehouse Hierarchy &amp; Bin Infrastructure
+      </h1>
+</div>
+<!-- Facility Selector & Context Controls -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="flex items-center gap-space-xs bg-surface-subtle px-space-md py-space-xs rounded-xl shadow-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">warehouse</span>
+<div class="flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Active Target Facility</span>
+<select class="bg-transparent font-headline-sm text-body-md text-text-primary font-semibold focus:outline-none cursor-pointer pr-space-sm" id="facilitySelector">
+<option value="WHA">Warehouse A (Central Logistics Hub - 4 Rows, 48 Active Bins)</option>
+<option value="WHB">Warehouse B (Cold Chain High-Rack - 6 Rows, 96 Bins)</option>
+<option value="WHC">Warehouse C (Oversized Freight Yard - 2 Rows, 24 Bins)</option>
+</select>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">unfold_more</span>
+</div>
+<button class="px-space-md py-space-sm rounded-xl bg-surface-subtle hover:bg-surface-container-high text-text-primary font-body-md text-body-md font-semibold transition-all duration-150 flex items-center gap-space-xs shadow-sm">
+<span class="material-symbols-outlined text-[18px]">account_tree</span>
+<span>Export Topology</span>
+</button>
+<button class="px-space-md py-space-sm rounded-xl bg-primary hover:bg-primary-container text-on-primary font-body-md text-body-md font-semibold transition-all duration-150 flex items-center gap-space-xs shadow-sm shadow-primary/20">
+<span class="material-symbols-outlined text-[18px]">add_box</span>
+<span>Register New Bin</span>
+</button>
+</div>
+</div>
+<!-- KPI Metric Readouts -->
+<div class="px-space-xl pt-space-lg pb-space-sm grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-space-md">
+<!-- Total Bins -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Total Infrastructure</span>
+<div class="w-8 h-8 rounded-lg bg-surface-subtle flex items-center justify-center text-text-secondary">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+</div>
+</div>
+<div class="mt-space-sm space-y-space-2xs">
+<div class="font-tabular-kpi text-tabular-kpi text-text-primary">48 Bins</div>
+<div class="font-label-code-sm text-label-code-sm text-on-surface-variant">Allocated across 4 Rows</div>
+</div>
+<div class="mt-space-sm h-1.5 w-full bg-surface-subtle rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+<!-- Occupied Bins -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Occupied Bins</span>
+<div class="w-8 h-8 rounded-lg bg-emerald-active/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">inventory</span>
+</div>
+</div>
+<div class="mt-space-sm space-y-space-2xs">
+<div class="font-tabular-kpi text-tabular-kpi text-primary">42 Bins <span class="font-headline-sm text-body-md font-semibold text-text-secondary">(87.5%)</span></div>
+<div class="font-label-code-sm text-label-code-sm text-primary font-medium">6 Bins open for putaway</div>
+</div>
+<div class="mt-space-sm h-1.5 w-full bg-surface-subtle rounded-full overflow-hidden">
+<div class="h-full bg-emerald-active rounded-full" style="width: 87.5%;"></div>
+</div>
+</div>
+<!-- Available Capacity -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Available Volume</span>
+<div class="w-8 h-8 rounded-lg bg-surface-subtle flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[18px]">data_usage</span>
+</div>
+</div>
+<div class="mt-space-sm space-y-space-2xs">
+<div class="font-tabular-kpi text-tabular-kpi text-text-primary">1,820 <span class="font-body-md text-body-md font-normal text-on-surface-variant">Units</span></div>
+<div class="font-label-code-sm text-label-code-sm text-on-surface-variant">24.2% global cube head-room</div>
+</div>
+<div class="mt-space-sm h-1.5 w-full bg-surface-subtle rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container rounded-full" style="width: 24.2%;"></div>
+</div>
+</div>
+<!-- Low-Stock Locations -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Low-Stock Trigger</span>
+<div class="w-8 h-8 rounded-lg bg-warning-amber-light flex items-center justify-center text-warning-amber">
+<span class="material-symbols-outlined text-[18px]">trending_down</span>
+</div>
+</div>
+<div class="mt-space-sm space-y-space-2xs">
+<div class="font-tabular-kpi text-tabular-kpi text-warning-amber">6 Bins</div>
+<div class="font-label-code-sm text-label-code-sm text-warning-amber font-semibold">Under threshold buffer (15%)</div>
+</div>
+<div class="mt-space-sm h-1.5 w-full bg-surface-subtle rounded-full overflow-hidden">
+<div class="h-full bg-warning-amber rounded-full" style="width: 12.5%;"></div>
+</div>
+</div>
+<!-- Critical Locations -->
+<div class="col-span-2 md:col-span-1 p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Critical Depletion</span>
+<div class="w-8 h-8 rounded-lg bg-critical-red-light flex items-center justify-center text-critical-red animate-pulse">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+</div>
+</div>
+<div class="mt-space-sm space-y-space-2xs">
+<div class="font-tabular-kpi text-tabular-kpi text-critical-red">2 Bins</div>
+<div class="font-label-code-sm text-label-code-sm text-critical-red font-semibold">Immediate Replenishment Req.</div>
+</div>
+<div class="mt-space-sm h-1.5 w-full bg-surface-subtle rounded-full overflow-hidden">
+<div class="h-full bg-critical-red rounded-full" style="width: 4.1%;"></div>
+</div>
+</div>
+</div>
+<!-- Main Multi-Tier Spatial Canvas -->
+<div class="p-space-xl space-y-space-xl">
+<!-- Visual Hierarchy Architecture Banner / Diagram Flow -->
+<div class="p-space-xl rounded-xl bg-surface-container-lowest shadow-sm space-y-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div>
+<span class="font-label-code-sm text-label-code-sm text-primary uppercase font-bold tracking-wider">Topology Model</span>
+<h2 class="font-headline-md text-headline-md text-text-primary">Entity Relational Schema</h2>
+</div>
+<div class="flex items-center gap-space-sm text-on-surface-variant font-label-code text-label-code">
+<span class="inline-flex items-center gap-1.5 px-space-xs py-space-2xs bg-surface-subtle rounded-lg">
+<span class="w-2 h-2 rounded-full bg-primary"></span> 1 Facility
+          </span>
+<span class="inline-flex items-center gap-1.5 px-space-xs py-space-2xs bg-surface-subtle rounded-lg">
+<span class="w-2 h-2 rounded-full bg-chart-indigo"></span> 4 Rows
+          </span>
+<span class="inline-flex items-center gap-1.5 px-space-xs py-space-2xs bg-surface-subtle rounded-lg">
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span> 48 Physical Bins
+          </span>
+<span class="inline-flex items-center gap-1.5 px-space-xs py-space-2xs bg-surface-subtle rounded-lg">
+<span class="w-2 h-2 rounded-full bg-chart-teal"></span> Active SKUs
+          </span>
+</div>
+</div>
+<!-- Structural Tree Flow Visualization -->
+<div class="p-space-lg rounded-xl bg-surface-subtle relative overflow-x-auto">
+<div class="min-w-[780px] flex items-center justify-between gap-space-md">
+<!-- Node 1: Warehouse Node -->
+<div class="flex-1 max-w-[200px] p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col items-center text-center relative group">
+<div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[22px]">corporate_fare</span>
+</div>
+<span class="font-label-code text-label-code font-bold text-text-primary mt-space-xs">Warehouse A</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Root Facility</span>
+<span class="mt-space-xs font-label-code-sm text-label-code-sm px-space-xs py-space-2xs rounded bg-surface-subtle text-primary font-semibold">WH-A Hub</span>
+</div>
+<div class="flex flex-col items-center justify-center text-outline-variant">
+<span class="material-symbols-outlined text-[20px] text-primary">arrow_forward</span>
+<span class="font-label-code-sm text-[9px] text-on-surface-variant">DISPATCH SECTOR</span>
+</div>
+<!-- Node 2: Rows Node -->
+<div class="flex-1 max-w-[220px] p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col items-center text-center">
+<div class="w-10 h-10 rounded-xl bg-chart-indigo text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[22px]">view_column</span>
+</div>
+<span class="font-label-code text-label-code font-bold text-text-primary mt-space-xs">4 Storage Rows</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Row A, Row B, Row C, Row D</span>
+<div class="mt-space-xs flex gap-1">
+<span class="font-label-code-sm text-label-code-sm px-1 rounded bg-secondary-container text-on-secondary-container">RW-A</span>
+<span class="font-label-code-sm text-label-code-sm px-1 rounded bg-secondary-container text-on-secondary-container">RW-B</span>
+<span class="font-label-code-sm text-label-code-sm px-1 rounded bg-secondary-container text-on-secondary-container">RW-C</span>
+<span class="font-label-code-sm text-label-code-sm px-1 rounded bg-secondary-container text-on-secondary-container">RW-D</span>
+</div>
+</div>
+<div class="flex flex-col items-center justify-center text-outline-variant">
+<span class="material-symbols-outlined text-[20px] text-chart-indigo">arrow_forward</span>
+<span class="font-label-code-sm text-[9px] text-on-surface-variant">RACK SLOTTING</span>
+</div>
+<!-- Node 3: Bins Node -->
+<div class="flex-1 max-w-[220px] p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col items-center text-center">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[22px]">shelves</span>
+</div>
+<span class="font-label-code text-label-code font-bold text-text-primary mt-space-xs">Discrete Bins</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">A01-A04, B01-B07, C01-C07...</span>
+<span class="mt-space-xs font-label-code-sm text-label-code-sm px-space-xs py-space-2xs rounded bg-emerald-active/10 text-primary font-semibold">48 Monitored Cells</span>
+</div>
+<div class="flex flex-col items-center justify-center text-outline-variant">
+<span class="material-symbols-outlined text-[20px] text-emerald-active">arrow_forward</span>
+<span class="font-label-code-sm text-[9px] text-on-surface-variant">INVENTORY COUNT</span>
+</div>
+<!-- Node 4: Product & Quantities Node -->
+<div class="flex-1 max-w-[220px] p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col items-center text-center">
+<div class="w-10 h-10 rounded-xl bg-chart-teal text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[22px]">qr_code_2</span>
+</div>
+<span class="font-label-code text-label-code font-bold text-text-primary mt-space-xs">Products &amp; Quantities</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">SKU Bindings + Live Qty</span>
+<span class="mt-space-xs font-label-code-sm text-label-code-sm px-space-xs py-space-2xs rounded bg-surface-subtle text-text-secondary font-semibold">Per-Bin Telemetry</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Dual-Pane Layout: Interactive Rows Grid (Left 8 Cols) + Active Bin Modal/Drawer Preview (Right 4 Cols) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- Interactive Row & Bin Matrix (Cols 1 to 8) -->
+<div class="lg:col-span-8 space-y-space-lg">
+<!-- Section Filter & View Toggle Bar -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-text-primary">Rack Bay Layout Matrix</span>
+<span class="font-label-code-sm text-label-code-sm px-space-xs py-space-2xs rounded bg-surface-subtle text-text-secondary">Interactive Mode</span>
+</div>
+<div class="flex items-center gap-space-sm font-label-code-sm text-label-code-sm">
+<span class="flex items-center gap-1 text-primary"><span class="w-2.5 h-2.5 rounded-full bg-emerald-active"></span> Healthy</span>
+<span class="flex items-center gap-1 text-warning-amber"><span class="w-2.5 h-2.5 rounded-full bg-warning-amber"></span> Low Stock</span>
+<span class="flex items-center gap-1 text-critical-red"><span class="w-2.5 h-2.5 rounded-full bg-critical-red"></span> Critical</span>
+<span class="flex items-center gap-1 text-secondary"><span class="w-2.5 h-2.5 rounded-full bg-surface-border"></span> Empty</span>
+</div>
+</div>
+<!-- ROW A: Electronics & Display Adapters -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-md">
+<span class="px-space-sm py-space-xs rounded bg-text-primary text-surface font-label-code text-label-code font-bold">ROW A</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Electronics &amp; Display Adapters</h3>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Section Bay: E-Zone North • 4 Bins Monitored</span>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span>Capacity: 255 / 400 Units</span>
+<span class="w-16 h-1.5 bg-surface-subtle rounded-full overflow-hidden inline-block"><span class="h-full bg-primary block" style="width: 63%"></span></span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-sm">
+<!-- A01 (Healthy) -->
+<div class="p-space-md rounded-xl bg-surface-subtle hover:bg-surface-container-high transition-all duration-150 cursor-pointer shadow-sm group" onclick="selectBin('A01', 45, 'HEALTHY', 'HDMI Splitters (HS-401)', 'WHA-RWA-A01-401', '40cm × 40cm × 30cm', '72%', '15', '50')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-text-primary text-surface">A01</span>
+<span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-primary font-bold">
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span> HEALTHY
+                </span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-text-primary">45 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">units</span></div>
+<div class="font-body-sm text-body-sm font-medium text-text-secondary truncate mt-1">HDMI Splitters</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex justify-between font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span>SKU: HS-401</span>
+<span>Max: 50</span>
+</div>
+</div>
+<!-- A02 (Critical) -->
+<div class="p-space-md rounded-xl bg-critical-red-light/40 hover:bg-critical-red-light transition-all duration-150 cursor-pointer shadow-sm group" onclick="selectBin('A02', 2, 'CRITICAL', 'DisplayPort Adapters (DP-880)', 'WHA-RWA-A02-880', '40cm × 40cm × 30cm', '4%', '15', '50')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-critical-red text-on-primary">A02</span>
+<span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-critical-red font-bold animate-pulse">
+<span class="w-2 h-2 rounded-full bg-critical-red"></span> CRITICAL
+                </span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-critical-red">2 <span class="font-body-sm text-body-sm font-normal text-critical-red">units</span></div>
+<div class="font-body-sm text-body-sm font-bold text-text-primary truncate mt-1">DisplayPort Adapters</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex justify-between font-label-code-sm text-label-code-sm text-critical-red">
+<span>SKU: DP-880</span>
+<span>Threshold: 15</span>
+</div>
+</div>
+<!-- A03 (Healthy) -->
+<div class="p-space-md rounded-xl bg-surface-subtle hover:bg-surface-container-high transition-all duration-150 cursor-pointer shadow-sm group" onclick="selectBin('A03', 60, 'HEALTHY', 'VGA Cables 1.8m (VG-180)', 'WHA-RWA-A03-180', '40cm × 40cm × 30cm', '80%', '20', '75')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-text-primary text-surface">A03</span>
+<span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-primary font-bold">
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span> HEALTHY
+                </span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-text-primary">60 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">units</span></div>
+<div class="font-body-sm text-body-sm font-medium text-text-secondary truncate mt-1">VGA Cables</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex justify-between font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span>SKU: VG-180</span>
+<span>Max: 75</span>
+</div>
+</div>
+<!-- A04 (Healthy) -->
+<div class="p-space-md rounded-xl bg-surface-subtle hover:bg-surface-container-high transition-all duration-150 cursor-pointer shadow-sm group" onclick="selectBin('A04', 148, 'HEALTHY', 'HDMI 4K Cables Pro (HC-4K)', 'WHA-RWA-A04-04K', '50cm × 40cm × 40cm', '98%', '30', '150')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-text-primary text-surface">A04</span>
+<span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-primary font-bold">
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span> HEALTHY
+                </span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-text-primary">148 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">units</span></div>
+<div class="font-body-sm text-body-sm font-medium text-text-secondary truncate mt-1">HDMI 4K Cables</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex justify-between font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span>SKU: HC-4K</span>
+<span>Max: 150</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ROW B: Peripherals & Cables (With Bin B07 Active Selected) -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-md">
+<span class="px-space-sm py-space-xs rounded bg-primary text-on-primary font-label-code text-label-code font-bold">ROW B</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Peripherals &amp; Cables</h3>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Section Bay: E-Zone Central • 5 Monitored Slots</span>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-space-xs font-label-code-sm text-label-code-sm text-primary font-semibold">
+<span class="material-symbols-outlined text-[16px]">touch_app</span>
+<span>Bin B07 Selected in Inspector</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-space-sm">
+<!-- B01 -->
+<div class="p-space-md rounded-xl bg-surface-subtle hover:bg-surface-container-high transition-all duration-150 cursor-pointer shadow-sm" onclick="selectBin('B01', 50, 'HEALTHY', 'Webcams 1080p HD (WC-108)', 'WHA-RWB-B01-108', '40cm × 40cm × 30cm', '83%', '10', '60')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-text-primary text-surface">B01</span>
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-text-primary">50 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">u</span></div>
+<div class="font-body-sm text-body-sm font-medium text-text-secondary truncate mt-1">Webcams</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant">SKU: WC-108</div>
+</div>
+<!-- B02 -->
+<div class="p-space-md rounded-xl bg-surface-subtle hover:bg-surface-container-high transition-all duration-150 cursor-pointer shadow-sm" onclick="selectBin('B02', 40, 'HEALTHY', 'USB Podcasting Mics (MC-USB)', 'WHA-RWB-B02-MIC', '40cm × 40cm × 30cm', '66%', '12', '60')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-text-primary text-surface">B02</span>
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-text-primary">40 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">u</span></div>
+<div class="font-body-sm text-body-sm font-medium text-text-secondary truncate mt-1">USB Mics</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant">SKU: MC-USB</div>
+</div>
+<!-- B03 (Low Stock) -->
+<div class="p-space-md rounded-xl bg-warning-amber-light/50 hover:bg-warning-amber-light transition-all duration-150 cursor-pointer shadow-sm" onclick="selectBin('B03', 4, 'LOW STOCK', 'USB-C Fast Cables (UC-301)', 'WHA-RWB-B03-301', '40cm × 40cm × 30cm', '8%', '15', '50')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-warning-amber text-on-primary">B03</span>
+<span class="font-label-code-sm text-label-code-sm text-warning-amber font-bold">LOW</span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-warning-amber">4 <span class="font-body-sm text-body-sm font-normal text-warning-amber">u</span></div>
+<div class="font-body-sm text-body-sm font-semibold text-text-primary truncate mt-1">USB-C Cables</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-code-sm text-label-code-sm text-warning-amber">Reorder Req</div>
+</div>
+<!-- B04 -->
+<div class="p-space-md rounded-xl bg-surface-subtle hover:bg-surface-container-high transition-all duration-150 cursor-pointer shadow-sm" onclick="selectBin('B04', 28, 'HEALTHY', 'USB Hubs 7-Port (HB-700)', 'WHA-RWB-B04-700', '40cm × 40cm × 30cm', '56%', '10', '50')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-text-primary text-surface">B04</span>
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-text-primary">28 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">u</span></div>
+<div class="font-body-sm text-body-sm font-medium text-text-secondary truncate mt-1">USB Hubs</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant">SKU: HB-700</div>
+</div>
+<!-- B07 (Active Target) -->
+<div class="p-space-md rounded-xl bg-emerald-active/10 hover:bg-emerald-active/20 transition-all duration-150 cursor-pointer shadow-md" id="card-B07" onclick="selectBin('B07', 38, 'HEALTHY', 'Wireless Mouse (WM-001)', 'WHA-RWB-B07-001', '40cm × 40cm × 30cm', '76%', '15', '50')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-primary text-on-primary">B07</span>
+<span class="inline-flex items-center gap-1 font-label-code-sm text-label-code-sm text-primary font-bold">
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span> ACTIVE
+                </span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-text-primary">38 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">units</span></div>
+<div class="font-body-sm text-body-sm font-bold text-text-primary truncate mt-1">Wireless Mice</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex justify-between font-label-code-sm text-label-code-sm text-primary font-semibold">
+<span>WM-001</span>
+<span>76% Cap</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ROW C: Keyboards & Hardware -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-md">
+<span class="px-space-sm py-space-xs rounded bg-text-primary text-surface font-label-code text-label-code font-bold">ROW C</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Keyboards &amp; Hardware</h3>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Section Bay: Mech Station South • 5 Monitored Slots</span>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span>Capacity: 90 / 220 Units</span>
+<span class="w-16 h-1.5 bg-surface-subtle rounded-full overflow-hidden inline-block"><span class="h-full bg-primary block" style="width: 41%"></span></span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-space-sm">
+<!-- C01 -->
+<div class="p-space-md rounded-xl bg-surface-subtle hover:bg-surface-container-high transition-all duration-150 cursor-pointer shadow-sm" onclick="selectBin('C01', 35, 'HEALTHY', 'PBT Keycaps Sets (KC-PBT)', 'WHA-RWC-C01-KC', '40cm × 40cm × 30cm', '70%', '10', '50')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-text-primary text-surface">C01</span>
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-text-primary">35 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">u</span></div>
+<div class="font-body-sm text-body-sm font-medium text-text-secondary truncate mt-1">Keycaps</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant">SKU: KC-PBT</div>
+</div>
+<!-- C02 -->
+<div class="p-space-md rounded-xl bg-surface-subtle hover:bg-surface-container-high transition-all duration-150 cursor-pointer shadow-sm" onclick="selectBin('C02', 20, 'HEALTHY', 'TKL Keyboards (KB-TKL)', 'WHA-RWC-C02-TKL', '40cm × 40cm × 30cm', '50%', '8', '40')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-text-primary text-surface">C02</span>
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-text-primary">20 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">u</span></div>
+<div class="font-body-sm text-body-sm font-medium text-text-secondary truncate mt-1">Keyboards</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant">SKU: KB-TKL</div>
+</div>
+<!-- C03 -->
+<div class="p-space-md rounded-xl bg-surface-subtle hover:bg-surface-container-high transition-all duration-150 cursor-pointer shadow-sm" onclick="selectBin('C03', 14, 'HEALTHY', 'Mouse Overflow Buffer (MO-BUF)', 'WHA-RWC-C03-BUF', '40cm × 40cm × 30cm', '28%', '5', '50')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-text-primary text-surface">C03</span>
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-text-primary">14 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">u</span></div>
+<div class="font-body-sm text-body-sm font-medium text-text-secondary truncate mt-1">Mouse Overflow</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant">SKU: MO-BUF</div>
+</div>
+<!-- C04 -->
+<div class="p-space-md rounded-xl bg-surface-subtle hover:bg-surface-container-high transition-all duration-150 cursor-pointer shadow-sm" onclick="selectBin('C04', 18, 'HEALTHY', 'Ergo Wrist Rests (WR-PAD)', 'WHA-RWC-C04-WR', '40cm × 40cm × 30cm', '45%', '8', '40')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-text-primary text-surface">C04</span>
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-text-primary">18 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">u</span></div>
+<div class="font-body-sm text-body-sm font-medium text-text-secondary truncate mt-1">Wrist Rests</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant">SKU: WR-PAD</div>
+</div>
+<!-- C07 (Critical) -->
+<div class="p-space-md rounded-xl bg-critical-red-light/40 hover:bg-critical-red-light transition-all duration-150 cursor-pointer shadow-sm" onclick="selectBin('C07', 3, 'CRITICAL', 'Keyboards Pro Mechanical (KB-PRO)', 'WHA-RWC-C07-PRO', '40cm × 40cm × 30cm', '7%', '10', '40')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-critical-red text-on-primary">C07</span>
+<span class="font-label-code-sm text-label-code-sm text-critical-red font-bold animate-pulse">CRIT</span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-critical-red">3 <span class="font-body-sm text-body-sm font-normal text-critical-red">u</span></div>
+<div class="font-body-sm text-body-sm font-bold text-text-primary truncate mt-1">Keyboards Pro</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-code-sm text-label-code-sm text-critical-red">Crit Reserve</div>
+</div>
+</div>
+</div>
+<!-- ROW D: Heavy Hardware & Power -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-md">
+<span class="px-space-sm py-space-xs rounded bg-text-primary text-surface font-label-code text-label-code font-bold">ROW D</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Heavy Hardware &amp; Power</h3>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Section Bay: High-Voltage Staging West • 4 Monitored Slots</span>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span>Capacity: 125 / 200 Units</span>
+<span class="w-16 h-1.5 bg-surface-subtle rounded-full overflow-hidden inline-block"><span class="h-full bg-primary block" style="width: 62.5%"></span></span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-sm">
+<!-- D01 -->
+<div class="p-space-md rounded-xl bg-surface-subtle hover:bg-surface-container-high transition-all duration-150 cursor-pointer shadow-sm" onclick="selectBin('D01', 50, 'HEALTHY', 'Heavy Duty Power Strips (PS-HD8)', 'WHA-RWD-D01-PS8', '60cm × 40cm × 40cm', '83%', '12', '60')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-text-primary text-surface">D01</span>
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-text-primary">50 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">units</span></div>
+<div class="font-body-sm text-body-sm font-medium text-text-secondary truncate mt-1">Power Strips</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant">SKU: PS-HD8</div>
+</div>
+<!-- D02 -->
+<div class="p-space-md rounded-xl bg-surface-subtle hover:bg-surface-container-high transition-all duration-150 cursor-pointer shadow-sm" onclick="selectBin('D02', 30, 'HEALTHY', 'Surge Protectors Rack (SP-RK1)', 'WHA-RWD-D02-SP1', '60cm × 40cm × 40cm', '60%', '10', '50')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-text-primary text-surface">D02</span>
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-text-primary">30 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">units</span></div>
+<div class="font-body-sm text-body-sm font-medium text-text-secondary truncate mt-1">Surge Protectors</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant">SKU: SP-RK1</div>
+</div>
+<!-- D03 (Empty) -->
+<div class="p-space-md rounded-xl bg-surface-subtle hover:bg-surface-container-high transition-all duration-150 cursor-pointer shadow-sm border-dashed" onclick="selectBin('D03', 0, 'AVAILABLE', 'Unassigned (Empty Cell)', 'WHA-RWD-D03-EMPTY', '60cm × 40cm × 40cm', '0%', '0', '60')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-surface-border text-text-secondary">D03</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant font-bold">AVAILABLE</span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-on-surface-variant">0 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">units</span></div>
+<div class="font-body-sm text-body-sm font-medium text-on-surface-variant truncate mt-1">Empty Slot</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-code-sm text-label-code-sm text-primary font-semibold">Ready for Putaway</div>
+</div>
+<!-- D04 -->
+<div class="p-space-md rounded-xl bg-surface-subtle hover:bg-surface-container-high transition-all duration-150 cursor-pointer shadow-sm" onclick="selectBin('D04', 45, 'HEALTHY', 'Steel Cable Trays (CT-MET)', 'WHA-RWD-D04-CTM', '60cm × 40cm × 40cm', '75%', '10', '60')">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code font-bold px-space-xs py-space-2xs rounded bg-text-primary text-surface">D04</span>
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-kpi text-headline-md text-text-primary">45 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">units</span></div>
+<div class="font-body-sm text-body-sm font-medium text-text-secondary truncate mt-1">Cable Trays</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant">SKU: CT-MET</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Bin Detail Modal/Drawer Preview (Cols 9 to 12) -->
+<div class="lg:col-span-4 sticky top-20 space-y-space-md">
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-md space-y-space-lg">
+<!-- Drawer Top Metadata -->
+<div class="flex items-start justify-between pb-space-xs">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-code-sm text-label-code-sm text-primary uppercase font-bold tracking-wider">Slot Inspector</span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-active"></span>
+</div>
+<h2 class="font-headline-md text-headline-md text-text-primary mt-1">Bin Telemetry Detail</h2>
+</div>
+<span class="inline-flex items-center gap-1.5 px-space-sm py-space-xs rounded-full bg-emerald-active/10 text-primary font-label-code-sm text-label-code-sm font-bold uppercase tracking-wider" id="detailStatusBadge">
+<span class="w-2 h-2 rounded-full bg-emerald-active"></span> HEALTHY
+            </span>
+</div>
+<!-- Product Card Overview with Visual -->
+<div class="p-space-md rounded-xl bg-surface-subtle flex items-center gap-space-md">
+<div class="w-16 h-16 rounded-lg bg-surface-container-lowest overflow-hidden flex-shrink-0 shadow-sm flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Close up commercial studio photography of an ergonomic sleek matte dark grey wireless gaming and office computer mouse on white studio surface, precision industrial product photography style, neutral lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG7USKarKLoENjLQq8M4IB4xzwUILWUlc0VncIuIESLHK4gCl0jCRClB3tQrhOIRy5qPNEb2zlhWFA6lgEbvlXNhRz9cI8n4D59HAWzYUjtvp1gQPIRbRJcyb71BD61vKZU7JFyLrGKkIfD_CB_ukY21132A4pwZikZgiIHbkCFgPIUUKpgxOGNqZo5Wn-GJOQdq1_4u3Q-0SPjOIk3rIVMzd6d7LULHP3E9OSh_vzh0UMHaz3H_0s"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-text-primary font-semibold truncate" id="detailProductTitle">Wireless Mouse</span>
+<span class="font-label-code text-label-code text-on-surface-variant font-medium" id="detailSku">SKU: WM-001</span>
+<span class="font-label-code-sm text-label-code-sm text-primary font-semibold mt-0.5">Physical Inventory Verified</span>
+</div>
+</div>
+<!-- Prominent Location & Code Token -->
+<div class="p-space-md rounded-xl bg-text-primary text-surface flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-surface-variant uppercase tracking-wider">Target Monospace Location</span>
+<span class="font-label-code text-headline-lg font-bold tracking-wide text-surface" id="detailBinCode">WH-A &gt; Row B &gt; Bin B07</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface/10 flex items-center justify-center text-surface">
+<span class="material-symbols-outlined text-[24px]">qr_code</span>
+</div>
+</div>
+<!-- Key Metrics Grid -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="p-space-sm rounded-lg bg-surface-subtle">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Live Quantity</span>
+<div class="font-tabular-kpi text-tabular-kpi text-text-primary mt-0.5" id="detailQty">38 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">Units</span></div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-subtle">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Cube Volume</span>
+<div class="font-tabular-kpi text-tabular-kpi text-primary mt-0.5" id="detailVolume">76% <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">Used</span></div>
+</div>
+</div>
+<!-- Technical Specs Table -->
+<div class="space-y-space-xs font-body-sm text-body-sm">
+<div class="flex justify-between py-space-xs">
+<span class="text-on-surface-variant">Physical Dimensions</span>
+<span class="font-label-code text-label-code font-semibold text-text-primary" id="detailDimensions">40cm × 40cm × 30cm</span>
+</div>
+<div class="flex justify-between py-space-xs">
+<span class="text-on-surface-variant">Reorder Threshold</span>
+<span class="font-label-code text-label-code font-semibold text-warning-amber" id="detailThreshold">15 units</span>
+</div>
+<div class="flex justify-between py-space-xs">
+<span class="text-on-surface-variant">Max Bin Capacity</span>
+<span class="font-label-code text-label-code font-semibold text-text-primary" id="detailCapacity">50 units</span>
+</div>
+<div class="flex justify-between py-space-xs">
+<span class="text-on-surface-variant">Industrial Barcode</span>
+<span class="font-label-code text-label-code font-semibold text-text-primary" id="detailBarcode">WHA-RWB-B07-001</span>
+</div>
+<div class="flex justify-between py-space-xs">
+<span class="text-on-surface-variant">Last Audited Cycle</span>
+<span class="font-label-code text-label-code text-on-surface-variant">Today, 08:24 AM by M. Vance</span>
+</div>
+</div>
+<!-- Volume Bar Visualizer -->
+<div class="space-y-space-2xs">
+<div class="flex justify-between font-label-code-sm text-label-code-sm">
+<span class="text-on-surface-variant">Physical Fill Status</span>
+<span class="font-bold text-text-primary" id="detailFillLabel">38 / 50 Bins (76%)</span>
+</div>
+<div class="h-2 w-full bg-surface-subtle rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-300" id="detailFillBar" style="width: 76%"></div>
+</div>
+</div>
+<!-- Quick Admin Action Controls -->
+<div class="pt-space-sm space-y-space-sm">
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant uppercase tracking-wider font-semibold">Quick Operator Actions</span>
+<div class="grid grid-cols-2 gap-space-sm">
+<button class="px-space-md py-space-sm rounded-xl bg-surface-subtle hover:bg-surface-container-high text-text-primary font-body-md text-body-md font-semibold transition-all duration-150 flex items-center justify-center gap-1.5 shadow-sm" onclick="openStockModal()">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+<span>Adjust Count</span>
+</button>
+<button class="px-space-md py-space-sm rounded-xl bg-surface-subtle hover:bg-surface-container-high text-text-primary font-body-md text-body-md font-semibold transition-all duration-150 flex items-center justify-center gap-1.5 shadow-sm" onclick="triggerRelocate()">
+<span class="material-symbols-outlined text-[18px]">move_up</span>
+<span>Relocate Bin</span>
+</button>
+<button class="px-space-md py-space-sm rounded-xl bg-surface-subtle hover:bg-surface-container-high text-text-primary font-body-md text-body-md font-semibold transition-all duration-150 flex items-center justify-center gap-1.5 shadow-sm" onclick="triggerPrintLabel()">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Print QR Label</span>
+</button>
+<button class="px-space-md py-space-sm rounded-xl bg-surface-subtle hover:bg-surface-container-high text-text-primary font-body-md text-body-md font-semibold transition-all duration-150 flex items-center justify-center gap-1.5 shadow-sm" onclick="triggerAuditLog()">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span>Movement Log</span>
+</button>
+</div>
+<button class="w-full py-space-sm rounded-xl bg-primary hover:bg-primary-container text-on-primary font-body-md text-body-md font-semibold transition-all duration-150 flex items-center justify-center gap-space-xs shadow-sm shadow-primary/20">
+<span class="material-symbols-outlined text-[18px]">fact_check</span>
+<span>Execute Instant Cycle Count</span>
+</button>
+</div>
+</div>
+<!-- Facility Secondary Diagnostic Banner -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-subtle flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">sensors</span>
+</div>
+<div>
+<div class="font-headline-sm text-body-md font-semibold text-text-primary">Telemetry Sensors Online</div>
+<div class="font-label-code-sm text-label-code-sm text-on-surface-variant">Optical shelf beam receivers active</div>
+</div>
+</div>
+<span class="font-label-code-sm text-label-code-sm font-bold text-primary px-space-xs py-space-2xs rounded bg-emerald-active/10">ALL 48 SYNCED</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Stock Adjustment Modal Overlay (Default hidden, toggleable via JavaScript) -->
+<div class="fixed inset-0 z-50 bg-text-primary/40 backdrop-blur-sm hidden items-center justify-center p-space-md" id="stockAdjustModal">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-xl shadow-xl p-space-xl space-y-space-lg">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">tune</span>
+<h3 class="font-headline-md text-headline-md text-text-primary">Stock Count Adjustment</h3>
+</div>
+<button class="text-on-surface-variant hover:text-text-primary" onclick="closeStockModal()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="p-space-md bg-surface-subtle rounded-xl space-y-space-xs">
+<div class="flex justify-between font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span>TARGET LOCATION</span>
+<span class="font-bold text-text-primary" id="modalTargetCode">WHA-RWB-B07</span>
+</div>
+<div class="font-headline-sm text-body-md font-semibold text-text-primary" id="modalTargetItem">Wireless Mouse (WM-001)</div>
+</div>
+<div class="space-y-space-xs">
+<label class="font-body-sm text-body-sm font-semibold text-text-primary">New Verified Units Count</label>
+<div class="flex items-center gap-space-sm">
+<button class="w-10 h-10 rounded-lg bg-surface-subtle hover:bg-surface-container-high font-headline-sm text-text-primary flex items-center justify-center font-bold" onclick="modifyCount(-1)">-</button>
+<input class="flex-1 text-center font-tabular-kpi text-headline-md py-space-xs bg-surface-subtle rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-primary" id="inputStockValue" type="number" value="38"/>
+<button class="w-10 h-10 rounded-lg bg-surface-subtle hover:bg-surface-container-high font-headline-sm text-text-primary flex items-center justify-center font-bold" onclick="modifyCount(1)">+</button>
+</div>
+</div>
+<div class="space-y-space-xs">
+<label class="font-body-sm text-body-sm font-semibold text-text-primary">Audit Adjustment Reason</label>
+<select class="w-full px-space-md py-space-sm rounded-lg bg-surface-subtle text-body-md text-text-primary focus:outline-none focus:ring-2 focus:ring-primary">
+<option>Cycle Count Reconcile</option>
+<option>Damaged Stock Write-off</option>
+<option>Supplier Mispack Discovery</option>
+<option>Emergency Return Restock</option>
+</select>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-space-sm rounded-xl bg-surface-subtle hover:bg-surface-container-high text-text-primary font-body-md text-body-md font-semibold" onclick="closeStockModal()">
+          Cancel
+        </button>
+<button class="px-space-md py-space-sm rounded-xl bg-primary hover:bg-primary-container text-on-primary font-body-md text-body-md font-semibold" onclick="saveStockAdjustment()">
+          Confirm Audit Entry
+        </button>
+</div>
+</div>
+</div>
+<!-- Toast Notification Overlay -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-space-sm px-space-md py-space-sm rounded-xl bg-text-primary text-surface shadow-xl" id="toastNotification">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+<span class="font-body-md text-body-md font-medium" id="toastMessage">Action registered successfully</span>
+</div>
+</div>
+<script>
+  let currentBin = 'B07';
+  let currentQty = 38;
+
+  function selectBin(binId, qty, status, product, barcode, dimensions, volumeStr, threshold, maxCap) {
+    currentBin = binId;
+    currentQty = qty;
+
+    // Update Drawer Title & Monospace Path
+    const binCodeEl = document.getElementById('detailBinCode');
+    const rowLetter = binId.charAt(0);
+    binCodeEl.textContent = `WH-A > Row ${rowLetter} > Bin ${binId}`;
+
+    // Update Product Details
+    document.getElementById('detailProductTitle').textContent = product.split('(')[0].trim();
+    document.getElementById('detailSku').textContent = 'SKU: ' + (barcode.split('-')[3] || 'SKU-000');
+    document.getElementById('detailQty').innerHTML = `${qty} <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">Units</span>`;
+    document.getElementById('detailVolume').innerHTML = `${volumeStr} <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">Used</span>`;
+    document.getElementById('detailDimensions').textContent = dimensions;
+    document.getElementById('detailThreshold').textContent = `${threshold} units`;
+    document.getElementById('detailCapacity').textContent = `${maxCap} units`;
+    document.getElementById('detailBarcode').textContent = barcode;
+
+    // Update Fill Bar
+    document.getElementById('detailFillLabel').textContent = `${qty} / ${maxCap} Units (${volumeStr})`;
+    const fillPercent = Math.min(100, Math.round((qty / maxCap) * 100));
+    const fillBar = document.getElementById('detailFillBar');
+    fillBar.style.width = `${fillPercent}%`;
+
+    // Status Badge Logic
+    const badge = document.getElementById('detailStatusBadge');
+    if (status === 'HEALTHY') {
+      badge.className = 'inline-flex items-center gap-1.5 px-space-sm py-space-xs rounded-full bg-emerald-active/10 text-primary font-label-code-sm text-label-code-sm font-bold uppercase tracking-wider';
+      badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-active"></span> HEALTHY';
+      fillBar.className = 'h-full bg-primary rounded-full transition-all duration-300';
+    } else if (status === 'LOW STOCK') {
+      badge.className = 'inline-flex items-center gap-1.5 px-space-sm py-space-xs rounded-full bg-warning-amber-light text-warning-amber font-label-code-sm text-label-code-sm font-bold uppercase tracking-wider';
+      badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-warning-amber"></span> LOW STOCK';
+      fillBar.className = 'h-full bg-warning-amber rounded-full transition-all duration-300';
+    } else if (status === 'CRITICAL') {
+      badge.className = 'inline-flex items-center gap-1.5 px-space-sm py-space-xs rounded-full bg-critical-red-light text-critical-red font-label-code-sm text-label-code-sm font-bold uppercase tracking-wider animate-pulse';
+      badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-critical-red"></span> CRITICAL';
+      fillBar.className = 'h-full bg-critical-red rounded-full transition-all duration-300';
+    } else {
+      badge.className = 'inline-flex items-center gap-1.5 px-space-sm py-space-xs rounded-full bg-surface-subtle text-text-secondary font-label-code-sm text-label-code-sm font-bold uppercase tracking-wider';
+      badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-secondary"></span> EMPTY';
+      fillBar.className = 'h-full bg-secondary rounded-full transition-all duration-300';
+    }
+
+    showToast(`Inspecting Bin: ${binId} (${product.split('(')[0].trim()})`);
+  }
+
+  function openStockModal() {
+    document.getElementById('modalTargetCode').textContent = `WH-A-RW${currentBin.charAt(0)}-${currentBin}`;
+    document.getElementById('modalTargetItem').textContent = document.getElementById('detailProductTitle').textContent;
+    document.getElementById('inputStockValue').value = currentQty;
+    
+    const modal = document.getElementById('stockAdjustModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeStockModal() {
+    const modal = document.getElementById('stockAdjustModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  function modifyCount(delta) {
+    const input = document.getElementById('inputStockValue');
+    let val = parseInt(input.value, 10) || 0;
+    val = Math.max(0, val + delta);
+    input.value = val;
+  }
+
+  function saveStockAdjustment() {
+    const newVal = parseInt(document.getElementById('inputStockValue').value, 10) || 0;
+    currentQty = newVal;
+    document.getElementById('detailQty').innerHTML = `${newVal} <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">Units</span>`;
+    closeStockModal();
+    showToast(`Bin ${currentBin} adjusted to ${newVal} units.`);
+  }
+
+  function triggerRelocate() {
+    showToast(`Initiating Relocation Sequence for Bin ${currentBin}...`);
+  }
+
+  function triggerPrintLabel() {
+    showToast(`Transmitting thermal QR label job to Zebra Print Engine #2...`);
+  }
+
+  function triggerAuditLog() {
+    showToast(`Displaying immutable telemetry ledger for Bin ${currentBin}`);
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toastNotification');
+    const msgEl = document.getElementById('toastMessage');
+    msgEl.textContent = msg;
+    toast.classList.remove('translate-y-20', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      toast.classList.add('translate-y-20', 'opacity-0');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 3200);
+  }
+</script></main></div></body></html>
