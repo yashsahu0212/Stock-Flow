@@ -1,1 +1,15 @@
 Agents.md
+# Stitch raw dumps & temporary exports (in case re-downloaded)
+stitch_*/
+*.tmp
+*.bak
+
+# Environment variables & local secrets
+.env
+.env.local
+.env.*.local
+
+# Build outputs & dependencies (if Node/Vite is added later)
+node_modules/
+dist/
+build/
