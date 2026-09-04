@@ -36,25 +36,34 @@ if (config.nodeEnv !== 'test') {
   });
 }
 
-// Root route
-app.get('/', (_req: Request, res: Response) => {
-  sendSuccess(res, {
-    name: 'Stock Flow - Multi-Warehouse Inventory API',
-    version: '1.0.0',
-    docs: '/docs/backend/API_CONTRACT.md',
-    health: '/api/health',
-    endpoints: {
-      auth: '/api/auth',
-      products: '/api/products',
-      warehouses: '/api/warehouses',
-      bins: '/api/bins',
-      inventory: '/api/inventory',
-      orders: '/api/orders',
-      qrVerify: '/api/qr/verify',
-      dashboard: '/api/dashboard',
-    },
-  });
+import path from 'path';
+import fs from 'fs';
+
+const rootDir = path.resolve(__dirname, '../../');
+
+// HTML delivery middleware with dynamic backend bridge injection
+app.use((req, res, next) => {
+  if (req.method === 'GET' && !req.path.startsWith('/api')) {
+    let filePath = '';
+    if (req.path === '/' || req.path === '/index.html') {
+      filePath = path.join(rootDir, 'index.html');
+    } else if (req.path.endsWith('.html')) {
+      filePath = path.join(rootDir, req.path.replace(/^\//, ''));
+    }
+
+    if (filePath && fs.existsSync(filePath)) {
+      let content = fs.readFileSync(filePath, 'utf-8');
+      if (!content.includes('app-bridge.js')) {
+        content = content.replace('</body>', '<script src="/app-bridge.js"></script></body>');
+      }
+      return res.type('html').send(content);
+    }
+  }
+  next();
 });
+
+// Serve static frontend assets and pages
+app.use(express.static(rootDir));
 
 // Mount all API routes
 app.use('/api', apiRouter);
