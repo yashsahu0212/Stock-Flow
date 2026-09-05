@@ -1,17 +1,25 @@
 {
   "name": "stockflow",
   "version": "1.0.0",
-  "description": "StockFlow â€” Autonomous Warehouse Inventory & Location Tracking Platform",
+  "private": true,
+  "description": "StockFlow — Autonomous Warehouse Inventory & Location Tracking Platform",
   "scripts": {
     "dev": "npm --prefix backend run dev",
-    "build": "prisma generate --schema=prisma/schema.prisma && npm --prefix backend run build",
+    "build": "prisma generate --schema=backend/prisma/schema.prisma",
     "start": "node backend/dist/server.js",
-    "prisma:generate": "prisma generate --schema=prisma/schema.prisma",
-    "prisma:migrate": "prisma migrate deploy --schema=prisma/schema.prisma",
-    "seed": "tsx prisma/seed.ts"
+    "prisma:generate": "prisma generate --schema=backend/prisma/schema.prisma",
+    "prisma:migrate": "prisma migrate deploy --schema=backend/prisma/schema.prisma",
+    "seed": "tsx backend/prisma/seed.ts",
+    "postinstall": "prisma generate --schema=backend/prisma/schema.prisma"
   },
   "dependencies": {
-    "@prisma/client": "^5.22.0"
+    "@prisma/client": "^5.22.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "prisma": "^5.22.0",
