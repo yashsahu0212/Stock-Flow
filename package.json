@@ -1,8 +1,8 @@
-{
+﻿{
   "name": "stockflow",
   "version": "1.0.0",
   "private": true,
-  "description": "StockFlow � Autonomous Warehouse Inventory & Location Tracking Platform",
+  "description": "StockFlow — Autonomous Warehouse Inventory & Location Tracking Platform",
   "scripts": {
     "dev": "npm --prefix backend run dev",
     "build": "prisma generate --schema=backend/prisma/schema.prisma",
@@ -26,3 +26,4 @@
     "tsx": "^4.19.3"
   }
 }
+
