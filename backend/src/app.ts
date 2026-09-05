@@ -40,18 +40,21 @@ import path from 'path';
 import fs from 'fs';
 
 const rootDir = path.resolve(__dirname, '../../');
+const frontendDir = path.join(rootDir, 'Frontend');
 
 // HTML delivery middleware with dynamic backend bridge injection
 app.use((req, res, next) => {
   if (req.method === 'GET' && !req.path.startsWith('/api')) {
     let filePath = '';
-    if (req.path === '/' || req.path === '/index.html') {
-      filePath = path.join(rootDir, 'index.html');
-    } else if (req.path.endsWith('.html')) {
-      filePath = path.join(rootDir, req.path.replace(/^\//, ''));
+    const reqFile = (req.path === '/' || req.path === '/index.html') ? 'index.html' : req.path.replace(/^\//, '');
+    
+    if (fs.existsSync(path.join(frontendDir, reqFile))) {
+      filePath = path.join(frontendDir, reqFile);
+    } else if (fs.existsSync(path.join(rootDir, reqFile))) {
+      filePath = path.join(rootDir, reqFile);
     }
 
-    if (filePath && fs.existsSync(filePath)) {
+    if (filePath && filePath.endsWith('.html')) {
       let content = fs.readFileSync(filePath, 'utf-8');
       if (!content.includes('app-bridge.js')) {
         content = content.replace('</body>', '<script src="/app-bridge.js"></script></body>');
@@ -62,7 +65,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve static frontend assets and pages
+// Serve static frontend assets and pages from Frontend directory
+app.use(express.static(frontendDir));
 app.use(express.static(rootDir));
 
 // Mount all API routes

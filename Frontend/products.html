@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockFlow — Products Catalog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-navbar">
+    <div class="nav-left">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon">
+          <span class="material-symbols-outlined">inventory_2</span>
+        </div>
+        <div class="brand-name">
+          Stock<span>Flow</span>
+          <span class="brand-pill">OS 2.6</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">
+          <span class="material-symbols-outlined">dashboard</span>
+          Dashboard
+        </a>
+        <a href="/products.html" class="nav-link active">
+          <span class="material-symbols-outlined">inventory_2</span>
+          Products
+        </a>
+        <a href="/orders.html" class="nav-link">
+          <span class="material-symbols-outlined">shopping_cart</span>
+          Orders
+        </a>
+        <a href="/movements.html" class="nav-link">
+          <span class="material-symbols-outlined">swap_horiz</span>
+          Movements
+        </a>
+        <a href="/warehouses.html" class="nav-link">
+          <span class="material-symbols-outlined">warehouse</span>
+          Warehouses
+        </a>
+        <a href="/scanner.html" class="nav-link">
+          <span class="material-symbols-outlined">qr_code_scanner</span>
+          Scanner
+        </a>
+        <a href="/admin.html" class="nav-link">
+          <span class="material-symbols-outlined">admin_panel_settings</span>
+          Admin
+        </a>
+      </nav>
+    </div>
+
+    <div class="nav-right">
+      <div class="db-pill">
+        <div class="db-pill-dot"></div>
+        SYSTEM ONLINE
+      </div>
+      <a href="/movements.html" class="btn btn-green btn-sm">
+        <span class="material-symbols-outlined">add</span> Stock Inward
+      </a>
+    </div>
+  </header>
+
+  <main class="app-container">
+    <section class="hero-section">
+      <div class="hero-text">
+        <h1>
+          Products & Shelf Inventory
+          <span class="count-label" id="count-label"></span>
+        </h1>
+        <p>Interactive product boxes & shelf catalog. Click any box to inspect full specifications, shelf coordinates, and instant actions.</p>
+      </div>
+    </section>
+
+    <!-- Toolbar with View Switcher -->
+    <div class="toolbar">
+      <input type="text" class="search-box" id="search-input" placeholder="Search product name, SKU identifier, or category…">
+      <select class="filter" id="filter-status">
+        <option value="">All Stock Statuses</option>
+        <option value="healthy">Healthy Stock</option>
+        <option value="low">Low Stock Alert</option>
+        <option value="out">Out of Stock</option>
+      </select>
+
+      <div class="view-toggle">
+        <button type="button" class="btn-view-toggle active" id="btn-view-grid" title="Shelf Box Grid View">
+          <span class="material-symbols-outlined" style="font-size:16px">grid_view</span> Boxes
+        </button>
+        <button type="button" class="btn-view-toggle" id="btn-view-table" title="Table List View">
+          <span class="material-symbols-outlined" style="font-size:16px">view_list</span> Table
+        </button>
+      </div>
+    </div>
+
+    <!-- 1. Visual Product Boxes Grid (Default) -->
+    <div class="product-grid" id="products-grid">
+      <div class="empty-state">Loading product boxes…</div>
+    </div>
+
+    <!-- 2. Alternate Table View (Toggleable) -->
+    <div class="glass-card" id="products-table-wrap" style="display: none; margin-top: 10px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>SKU</th>
+            <th>Category</th>
+            <th>Unit Price</th>
+            <th class="right">On-Hand Stock</th>
+            <th>Warehouse Location</th>
+            <th>Health Status</th>
+          </tr>
+        </thead>
+        <tbody id="products-body">
+          <tr><td colspan="7" class="empty-state">Loading products database…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Product Details Inspection Modal -->
+  <div class="modal-overlay" id="modal-product-details">
+    <div class="modal" style="width: 540px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+        <span class="badge badge-green" id="modal-prod-status">HEALTHY</span>
+        <button type="button" class="btn-remove-item" id="btn-close-prod-modal">✕</button>
+      </div>
+
+      <h2 id="modal-prod-name" style="margin-bottom: 4px;">Product Name</h2>
+      <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;" id="modal-prod-category">Category</div>
+
+      <div class="spec-grid">
+        <div class="spec-item">
+          <div class="spec-label">SKU Identifier</div>
+          <div class="spec-val" id="modal-prod-sku">—</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Unit Price</div>
+          <div class="spec-val" id="modal-prod-price">$0.00</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">On-Hand Physical Stock</div>
+          <div class="spec-val" id="modal-prod-stock" style="color: var(--primary);">0 units</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Min Safety Threshold</div>
+          <div class="spec-val" id="modal-prod-min-stock">10 units</div>
+        </div>
+      </div>
+
+      <div style="background: var(--bg-subtle); border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px; border: 1px solid var(--border-main);">
+        <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px;">
+          Assigned Warehouse Shelf & Bin
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="material-symbols-outlined" style="color: var(--primary);">warehouse</span>
+            <div style="font-weight: 700; font-size: 14px;" id="modal-prod-location">—</div>
+          </div>
+          <span class="sku" id="modal-prod-shelf-code">—</span>
+        </div>
+      </div>
+
+      <div class="modal-actions" style="margin-top: 0;">
+        <a href="/movements.html" class="btn btn-outline" id="modal-btn-move">
+          <span class="material-symbols-outlined">swap_horiz</span> Move / Relocate
+        </a>
+        <a href="/scanner.html" class="btn btn-green" id="modal-btn-scan">
+          <span class="material-symbols-outlined">qr_code_scanner</span> Scan & Adjust on Shelf
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/app-bridge.js"></script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockFlow — Autonomous Warehouse Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar (Awwwards Header) -->
+  <header class="top-navbar">
+    <div class="nav-left">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon">
+          <span class="material-symbols-outlined">inventory_2</span>
+        </div>
+        <div class="brand-name">
+          Stock<span>Flow</span>
+          <span class="brand-pill">OS 2.6</span>
+        </div>
+      </a>
+
+      <!-- Center Pill Menu -->
+      <nav class="nav-menu">
+        <a href="/" class="nav-link active">
+          <span class="material-symbols-outlined">dashboard</span>
+          Dashboard
+        </a>
+        <a href="/products.html" class="nav-link">
+          <span class="material-symbols-outlined">inventory_2</span>
+          Products
+        </a>
+        <a href="/orders.html" class="nav-link">
+          <span class="material-symbols-outlined">shopping_cart</span>
+          Orders
+        </a>
+        <a href="/movements.html" class="nav-link">
+          <span class="material-symbols-outlined">swap_horiz</span>
+          Movements
+        </a>
+        <a href="/warehouses.html" class="nav-link">
+          <span class="material-symbols-outlined">warehouse</span>
+          Warehouses
+        </a>
+        <a href="/scanner.html" class="nav-link">
+          <span class="material-symbols-outlined">qr_code_scanner</span>
+          Scanner
+        </a>
+        <a href="/admin.html" class="nav-link">
+          <span class="material-symbols-outlined">admin_panel_settings</span>
+          Admin
+        </a>
+      </nav>
+    </div>
+
+    <div class="nav-right">
+      <div class="db-pill">
+        <div class="db-pill-dot"></div>
+        SYSTEM ONLINE
+      </div>
+      <a href="/orders.html" class="btn btn-outline btn-sm">
+        <span class="material-symbols-outlined">add</span> Order
+      </a>
+      <a href="/movements.html" class="btn btn-primary btn-sm">
+        <span class="material-symbols-outlined">swap_vert</span> Move Stock
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Application Canvas -->
+  <main class="app-container">
+    
+    <!-- Hero / Headline -->
+    <section class="hero-section">
+      <div class="hero-text">
+        <h1>
+          Warehouse Intelligence
+          <span class="badge badge-green" style="font-size: 11px; vertical-align: middle;">REAL-TIME SYNC</span>
+        </h1>
+        <p>Telemetry, inventory velocity, and multi-node routing across global fulfillment hubs</p>
+      </div>
+      <div class="hero-actions">
+        <a href="/orders.html" class="btn btn-outline">
+          <span class="material-symbols-outlined">list_alt</span> Orders Stream
+        </a>
+        <a href="/movements.html" class="btn btn-green">
+          <span class="material-symbols-outlined">add_circle</span> New Movement
+        </a>
+      </div>
+    </section>
+
+    <!-- Bento KPI Metrics Matrix -->
+    <div class="bento-grid">
+      <div class="bento-card card-emerald">
+        <div class="bento-header">
+          <span class="bento-label">Catalog SKUs</span>
+          <div class="bento-icon-wrap emerald">
+            <span class="material-symbols-outlined">inventory_2</span>
+          </div>
+        </div>
+        <div class="bento-value" id="kpi-products">—</div>
+        <div class="bento-sub">Active tracked items</div>
+      </div>
+
+      <div class="bento-card card-blue">
+        <div class="bento-header">
+          <span class="bento-label">Physical Units</span>
+          <div class="bento-icon-wrap blue">
+            <span class="material-symbols-outlined">layers</span>
+          </div>
+        </div>
+        <div class="bento-value" id="kpi-units">—</div>
+        <div class="bento-sub">Total on-hand stock</div>
+      </div>
+
+      <div class="bento-card card-amber">
+        <div class="bento-header">
+          <span class="bento-label">Low Stock</span>
+          <div class="bento-icon-wrap amber">
+            <span class="material-symbols-outlined">warning</span>
+          </div>
+        </div>
+        <div class="bento-value" id="kpi-low" style="color: var(--amber-text);">—</div>
+        <div class="bento-sub">Below safety threshold</div>
+      </div>
+
+      <div class="bento-card card-purple">
+        <div class="bento-header">
+          <span class="bento-label">Pending Orders</span>
+          <div class="bento-icon-wrap purple">
+            <span class="material-symbols-outlined">shopping_cart</span>
+          </div>
+        </div>
+        <div class="bento-value" id="kpi-orders">—</div>
+        <div class="bento-sub">Fulfillment queue</div>
+      </div>
+
+      <div class="bento-card card-red">
+        <div class="bento-header">
+          <span class="bento-label">Today's Moves</span>
+          <div class="bento-icon-wrap red">
+            <span class="material-symbols-outlined">swap_horiz</span>
+          </div>
+        </div>
+        <div class="bento-value" id="kpi-movements">—</div>
+        <div class="bento-sub">Inward & transfers flow</div>
+      </div>
+    </div>
+
+    <!-- Activity Stream & Low Stock Radar -->
+    <div class="split-grid">
+      <!-- Recent Stock Movements -->
+      <div class="glass-card">
+        <div class="glass-card-header">
+          <h2>
+            <span class="material-symbols-outlined">history</span>
+            Live Movement Stream
+          </h2>
+          <a href="/movements.html" style="font-size: 12px; font-weight: 700; color: var(--primary); text-decoration: none;">
+            Full Audit Log →
+          </a>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Product</th>
+              <th>SKU</th>
+              <th>Operation</th>
+              <th class="right">Qty</th>
+              <th>Route</th>
+            </tr>
+          </thead>
+          <tbody id="movements-body">
+            <tr><td colspan="6" class="empty-state">Connecting to telemetry feed…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Low Stock Radar -->
+      <div class="glass-card">
+        <div class="glass-card-header">
+          <h2>
+            <span class="material-symbols-outlined">radar</span>
+            Low Stock Radar
+          </h2>
+          <span class="badge badge-amber">CRITICAL</span>
+        </div>
+        <ul class="low-stock-list" id="low-stock-list">
+          <li class="empty-state">Evaluating stock thresholds…</li>
+        </ul>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="/app-bridge.js"></script>
+</body>
+</html>

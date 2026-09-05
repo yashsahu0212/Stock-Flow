@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockFlow — QR & Shelf Scanner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <!-- jsQR for real-time camera scanning -->
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-navbar">
+    <div class="nav-left">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon">
+          <span class="material-symbols-outlined">inventory_2</span>
+        </div>
+        <div class="brand-name">
+          Stock<span>Flow</span>
+          <span class="brand-pill">OS 2.6</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">
+          <span class="material-symbols-outlined">dashboard</span>
+          Dashboard
+        </a>
+        <a href="/products.html" class="nav-link">
+          <span class="material-symbols-outlined">inventory_2</span>
+          Products
+        </a>
+        <a href="/orders.html" class="nav-link">
+          <span class="material-symbols-outlined">shopping_cart</span>
+          Orders
+        </a>
+        <a href="/movements.html" class="nav-link">
+          <span class="material-symbols-outlined">swap_horiz</span>
+          Movements
+        </a>
+        <a href="/warehouses.html" class="nav-link">
+          <span class="material-symbols-outlined">warehouse</span>
+          Warehouses
+        </a>
+        <a href="/scanner.html" class="nav-link active">
+          <span class="material-symbols-outlined">qr_code_scanner</span>
+          Scanner
+        </a>
+        <a href="/admin.html" class="nav-link">
+          <span class="material-symbols-outlined">admin_panel_settings</span>
+          Admin
+        </a>
+      </nav>
+    </div>
+
+    <div class="nav-right">
+      <div class="db-pill">
+        <div class="db-pill-dot"></div>
+        SYSTEM ONLINE
+      </div>
+      <a href="/admin.html" class="btn btn-outline btn-sm">
+        <span class="material-symbols-outlined">admin_panel_settings</span> Admin Panel
+      </a>
+    </div>
+  </header>
+
+  <main class="app-container">
+    <section class="hero-section">
+      <div class="hero-text">
+        <h1>
+          QR & Shelf Scanner
+          <span class="badge badge-green" style="font-size: 11px;">LIVE SCAN</span>
+        </h1>
+        <p>Scan shelf QR codes to verify location coordinates, inspect inventory on-hand, and execute real-time quantity adjustments</p>
+      </div>
+    </section>
+
+    <!-- Scanner Split Grid -->
+    <div class="scanner-grid">
+      
+      <!-- Camera & Scan Controls -->
+      <div class="camera-card">
+        <div class="viewfinder-wrapper">
+          <video id="camera-video" playsinline muted autoplay></video>
+          <canvas id="camera-canvas"></canvas>
+          <div class="viewfinder-reticle">
+            <div class="viewfinder-scanline"></div>
+          </div>
+        </div>
+
+        <div style="width: 100%; display: flex; gap: 10px; margin-bottom: 16px;">
+          <button type="button" class="btn btn-green" id="btn-toggle-camera" style="flex: 1; justify-content: center;">
+            <span class="material-symbols-outlined">videocam</span> Start Camera
+          </button>
+          <button type="button" class="btn btn-outline" id="btn-switch-camera" style="display: none;" title="Switch Camera">
+            <span class="material-symbols-outlined">cameraswitch</span>
+          </button>
+        </div>
+
+        <!-- Simulated / Manual QR Input -->
+        <div style="width: 100%; background: var(--bg-subtle); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-main);">
+          <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px;">
+            Quick Presets / Manual Scan Input
+          </div>
+          <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+            <select id="preset-qr-select" class="filter" style="flex: 1; font-size: 12px; padding: 8px 12px;">
+              <option value="">Choose a shelf or product QR preset…</option>
+              <option value="SHELF-WH01-R01-S01">Shelf S01 (WH01 · R01 · S01)</option>
+              <option value="SHELF-WH01-R01-S02">Shelf S02 (WH01 · R01 · S02)</option>
+              <option value="SHELF-WH01-R01-S03">Shelf S03 (WH01 · R01 · S03)</option>
+              <option value="SHELF-WH01-R02-S10">Shelf S10 (WH01 · R02 · S10)</option>
+              <option value="SHELF-WH02-R01-S01">Shelf S01 (WH02 · Regional Depot)</option>
+              <option value="LOG-G502">Product: Logitech G502 Mouse</option>
+              <option value="RAM-DDR5-32">Product: Corsair DDR5 32GB RAM</option>
+            </select>
+            <button type="button" class="btn btn-primary btn-sm" id="btn-load-preset">
+              Scan Preset
+            </button>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="manual-qr-input" class="search-box" style="padding: 8px 12px; min-width: 0; font-size: 12px; font-family: monospace;" placeholder="Enter QR code (e.g. SHELF-WH01-R01-S01)…">
+            <button type="button" class="btn btn-outline btn-sm" id="btn-manual-scan">
+              Verify
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Verification & Quantity Adjustment Result -->
+      <div class="glass-card" id="scan-result-card">
+        <div class="glass-card-header">
+          <h2>
+            <span class="material-symbols-outlined">verified</span>
+            Shelf Verification & Adjuster
+          </h2>
+          <span id="scan-status-badge" class="badge badge-gray">Awaiting Scan</span>
+        </div>
+
+        <div style="padding: 24px;" id="scan-content">
+          <!-- Empty state before scan -->
+          <div class="empty-state" id="scan-empty-state">
+            <span class="material-symbols-outlined" style="font-size: 48px; color: var(--text-dim); margin-bottom: 12px; display: block;">qr_code_2</span>
+            <div style="font-weight: 700; color: var(--text-main); font-size: 15px; margin-bottom: 4px;">Ready to Scan Shelf</div>
+            <div style="font-size: 13px; color: var(--text-muted); max-width: 320px; margin: 0 auto;">
+              Point your camera at a shelf QR label, or pick a preset from the left panel to confirm the location and adjust on-hand inventory.
+            </div>
+          </div>
+
+          <!-- Active verified shelf form (hidden by default) -->
+          <div id="scan-verified-panel" style="display: none;">
+            
+            <div style="background: var(--bg-subtle); border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px; border: 1px solid var(--border-main);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                <div>
+                  <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Confirmed Location</div>
+                  <div style="font-size: 18px; font-weight: 800; color: var(--text-main); margin-top: 2px;" id="loc-title">—</div>
+                  <div style="font-size: 12px; color: var(--text-muted);" id="loc-subtitle">—</div>
+                </div>
+                <div class="sku" id="loc-qr-code">—</div>
+              </div>
+            </div>
+
+            <!-- Product Selection on this shelf -->
+            <div class="form-group">
+              <label>Product Stored on this Shelf</label>
+              <select id="shelf-product-select" class="filter" style="width: 100%;">
+                <option value="">Select product on shelf…</option>
+              </select>
+            </div>
+
+            <!-- Current vs New Quantity Stepper -->
+            <div style="background: var(--bg-subtle); border-radius: var(--radius-md); padding: 16px; margin-bottom: 16px; border: 1px solid var(--border-main);">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Current On-Hand</span>
+                <span style="font-size: 20px; font-weight: 800; color: var(--primary);" id="shelf-current-qty">0</span>
+              </div>
+
+              <div style="margin-top: 14px;">
+                <label style="display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">
+                  Set New Quantity
+                </label>
+                <div class="qty-stepper">
+                  <button type="button" class="btn-step" id="step-minus-10">-10</button>
+                  <button type="button" class="btn-step" id="step-minus-1">-1</button>
+                  <input type="number" id="shelf-new-qty" min="0" value="0">
+                  <button type="button" class="btn-step" id="step-plus-1">+1</button>
+                  <button type="button" class="btn-step" id="step-plus-10">+10</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Adjustment Reason -->
+            <div class="form-group">
+              <label>Reason for Adjustment</label>
+              <select id="shelf-adjust-reason" class="filter" style="width: 100%;">
+                <option value="Cycle Count Physical Recount">Cycle Count Physical Recount</option>
+                <option value="Damaged Goods Deduction">Damaged Goods Deduction</option>
+                <option value="Direct Shelf Restock">Direct Shelf Restock</option>
+                <option value="Inventory Discrepancy Correction">Inventory Discrepancy Correction</option>
+                <option value="Returned Goods Return to Shelf">Returned Goods Return to Shelf</option>
+              </select>
+            </div>
+
+            <!-- Submit Adjustment -->
+            <button type="button" class="btn btn-green" id="btn-submit-adjust" style="width: 100%; justify-content: center; padding: 12px; font-size: 14px;">
+              <span class="material-symbols-outlined">check_circle</span> Confirm & Update Quantity
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="/app-bridge.js"></script>
+</body>
+</html>

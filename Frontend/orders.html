@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockFlow — Orders Fulfillment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-navbar">
+    <div class="nav-left">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon">
+          <span class="material-symbols-outlined">inventory_2</span>
+        </div>
+        <div class="brand-name">
+          Stock<span>Flow</span>
+          <span class="brand-pill">OS 2.6</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">
+          <span class="material-symbols-outlined">dashboard</span>
+          Dashboard
+        </a>
+        <a href="/products.html" class="nav-link">
+          <span class="material-symbols-outlined">inventory_2</span>
+          Products
+        </a>
+        <a href="/orders.html" class="nav-link active">
+          <span class="material-symbols-outlined">shopping_cart</span>
+          Orders
+        </a>
+        <a href="/movements.html" class="nav-link">
+          <span class="material-symbols-outlined">swap_horiz</span>
+          Movements
+        </a>
+        <a href="/warehouses.html" class="nav-link">
+          <span class="material-symbols-outlined">warehouse</span>
+          Warehouses
+        </a>
+        <a href="/scanner.html" class="nav-link">
+          <span class="material-symbols-outlined">qr_code_scanner</span>
+          Scanner
+        </a>
+        <a href="/admin.html" class="nav-link">
+          <span class="material-symbols-outlined">admin_panel_settings</span>
+          Admin
+        </a>
+      </nav>
+    </div>
+
+    <div class="nav-right">
+      <div class="db-pill">
+        <div class="db-pill-dot"></div>
+        SYSTEM ONLINE
+      </div>
+      <button class="btn btn-green btn-sm" id="btn-new-order">
+        <span class="material-symbols-outlined">add</span> Create Order
+      </button>
+    </div>
+  </header>
+
+  <main class="app-container">
+    <section class="hero-section">
+      <div class="hero-text">
+        <h1>Orders Management</h1>
+        <p>Real-time customer fulfillment pipeline, priority queuing, and picking progress telemetry</p>
+      </div>
+      <button class="btn btn-green" onclick="document.getElementById('btn-new-order').click()">
+        <span class="material-symbols-outlined">add_circle</span> New Order
+      </button>
+    </section>
+
+    <!-- Filters -->
+    <div class="toolbar">
+      <select class="filter" id="filter-status">
+        <option value="">All Statuses</option>
+        <option value="PENDING">Pending</option>
+        <option value="PICKING">Picking</option>
+        <option value="COMPLETED">Completed</option>
+        <option value="CANCELLED">Cancelled</option>
+      </select>
+      <select class="filter" id="filter-priority">
+        <option value="">All Priorities</option>
+        <option value="URGENT">Urgent</option>
+        <option value="HIGH">High</option>
+        <option value="NORMAL">Normal</option>
+        <option value="LOW">Low</option>
+      </select>
+    </div>
+
+    <!-- Orders Table -->
+    <div class="glass-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Order #</th>
+            <th>Customer Name</th>
+            <th>Priority</th>
+            <th>Fulfillment Status</th>
+            <th>Picking Progress</th>
+            <th class="right">Lifecycle Action</th>
+          </tr>
+        </thead>
+        <tbody id="orders-body">
+          <tr><td colspan="6" class="empty-state">Loading customer orders…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- New Order Modal -->
+  <div class="modal-overlay" id="order-modal">
+    <div class="modal">
+      <h2>Create New Customer Order</h2>
+      <form id="order-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Customer Name</label>
+            <input type="text" id="order-customer" required placeholder="e.g. Apex Global Tech">
+          </div>
+          <div class="form-group">
+            <label>Priority</label>
+            <select id="order-priority">
+              <option value="NORMAL">Normal</option>
+              <option value="LOW">Low</option>
+              <option value="HIGH">High</option>
+              <option value="URGENT">Urgent</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Order Line Items</label>
+          <div class="order-items-list" id="order-items-list">
+            <div class="order-item-row">
+              <select class="item-product" required><option value="">Select product…</option></select>
+              <input type="number" class="item-qty" min="1" value="1" placeholder="Qty" required>
+              <button type="button" class="btn-remove-item" title="Remove">×</button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm" id="btn-add-item" style="margin-top:10px">
+            <span class="material-symbols-outlined">add</span> Add Item Line
+          </button>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" id="btn-cancel-order">Cancel</button>
+          <button type="submit" class="btn btn-green">Dispatch Order</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/app-bridge.js"></script>
+</body>
+</html>

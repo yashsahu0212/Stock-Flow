@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockFlow — Admin Control Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-navbar">
+    <div class="nav-left">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon">
+          <span class="material-symbols-outlined">inventory_2</span>
+        </div>
+        <div class="brand-name">
+          Stock<span>Flow</span>
+          <span class="brand-pill">OS 2.6</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">
+          <span class="material-symbols-outlined">dashboard</span>
+          Dashboard
+        </a>
+        <a href="/products.html" class="nav-link">
+          <span class="material-symbols-outlined">inventory_2</span>
+          Products
+        </a>
+        <a href="/orders.html" class="nav-link">
+          <span class="material-symbols-outlined">shopping_cart</span>
+          Orders
+        </a>
+        <a href="/movements.html" class="nav-link">
+          <span class="material-symbols-outlined">swap_horiz</span>
+          Movements
+        </a>
+        <a href="/warehouses.html" class="nav-link">
+          <span class="material-symbols-outlined">warehouse</span>
+          Warehouses
+        </a>
+        <a href="/scanner.html" class="nav-link">
+          <span class="material-symbols-outlined">qr_code_scanner</span>
+          Scanner
+        </a>
+        <a href="/admin.html" class="nav-link active">
+          <span class="material-symbols-outlined">admin_panel_settings</span>
+          Admin
+        </a>
+      </nav>
+    </div>
+
+    <div class="nav-right">
+      <div class="db-pill">
+        <div class="db-pill-dot"></div>
+        SYSTEM ONLINE
+      </div>
+      <div id="admin-user-badge" style="display: none; align-items: center; gap: 8px;">
+        <span class="badge badge-green" id="admin-user-name">Admin</span>
+        <button type="button" class="btn btn-outline btn-sm" id="btn-admin-logout">Sign Out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-container">
+
+    <!-- 1. Admin Authentication Gate (shown if not logged in) -->
+    <div id="admin-login-view" class="admin-auth-gate">
+      <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+        <span class="material-symbols-outlined" style="font-size: 26px;">lock</span>
+      </div>
+      <h2 style="font-size: 20px; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">Admin Authentication Required</h2>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">
+        Please enter your admin credentials to access the administrative control center.
+      </p>
+
+      <form id="admin-login-form" style="text-align: left;">
+        <div class="form-group">
+          <label for="admin-username">Username or Email</label>
+          <input type="text" id="admin-username" placeholder="e.g. admin or admin@stockflow.internal" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label for="admin-password">Password</label>
+          <input type="password" id="admin-password" placeholder="Enter your admin password" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 8px;">
+          <span class="material-symbols-outlined">key</span> Sign In to Admin Panel
+        </button>
+      </form>
+    </div>
+
+    <!-- 2. Authenticated Admin Control Center (hidden by default) -->
+    <div id="admin-panel-view" style="display: none;">
+      
+      <section class="hero-section">
+        <div class="hero-text">
+          <h1>
+            Admin Control Center
+            <span class="badge badge-purple" style="font-size: 11px;">SYSTEM ADMIN</span>
+          </h1>
+          <p>Manage product catalog definitions, global warehouse topology, safety thresholds, and system audit policies</p>
+        </div>
+      </section>
+
+      <!-- Admin Feature Navigation Tabs -->
+      <div class="admin-nav-tabs">
+        <button type="button" class="admin-nav-tab active" data-tab="tab-add-product">
+          <span class="material-symbols-outlined">add_box</span> Add Product SKU
+        </button>
+        <button type="button" class="admin-nav-tab" data-tab="tab-add-warehouse">
+          <span class="material-symbols-outlined">domain_add</span> Create Warehouse
+        </button>
+        <button type="button" class="admin-nav-tab" data-tab="tab-thresholds">
+          <span class="material-symbols-outlined">tune</span> Safety Thresholds
+        </button>
+        <button type="button" class="admin-nav-tab" data-tab="tab-audit-logs">
+          <span class="material-symbols-outlined">policy</span> System Audit Log
+        </button>
+      </div>
+
+      <!-- TAB 1: Add New Product SKU -->
+      <div class="admin-tab-pane active" id="tab-add-product">
+        <div class="glass-card" style="max-width: 720px;">
+          <div class="glass-card-header">
+            <h2><span class="material-symbols-outlined">add_box</span> Register New Product SKU</h2>
+          </div>
+          <div style="padding: 24px;">
+            <form id="form-create-product">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Product SKU Identifier</label>
+                  <input type="text" id="prod-sku" required placeholder="e.g. SSD-NVME-4TB" style="font-family: monospace; text-transform: uppercase;">
+                </div>
+                <div class="form-group">
+                  <label>Category</label>
+                  <input type="text" id="prod-category" placeholder="e.g. Storage / Components">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" id="prod-name" required placeholder="e.g. Samsung 990 PRO NVMe M.2 SSD 4TB">
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Unit Price ($ USD)</label>
+                  <input type="number" step="0.01" min="0" id="prod-price" value="299.99" required>
+                </div>
+                <div class="form-group">
+                  <label>Min Safety Stock Threshold</label>
+                  <input type="number" min="0" id="prod-min-stock" value="15" required>
+                </div>
+                <div class="form-group">
+                  <label>Unit of Measure</label>
+                  <input type="text" id="prod-unit" value="pcs" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Barcode / GTIN</label>
+                <input type="text" id="prod-barcode" placeholder="e.g. 8806094251234">
+              </div>
+
+              <button type="submit" class="btn btn-green" style="margin-top: 10px;">
+                <span class="material-symbols-outlined">save</span> Register & Publish SKU
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: Create Warehouse -->
+      <div class="admin-tab-pane" id="tab-add-warehouse">
+        <div class="glass-card" style="max-width: 720px;">
+          <div class="glass-card-header">
+            <h2><span class="material-symbols-outlined">domain_add</span> Create New Warehouse Node</h2>
+          </div>
+          <div style="padding: 24px;">
+            <form id="form-create-warehouse">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Warehouse Code</label>
+                  <input type="text" id="wh-code" required placeholder="e.g. WH03" style="font-family: monospace; text-transform: uppercase;">
+                </div>
+                <div class="form-group">
+                  <label>Total Bin Capacity</label>
+                  <input type="number" min="1" id="wh-capacity" value="500">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Warehouse Facility Name</label>
+                <input type="text" id="wh-name" required placeholder="e.g. East Coast Automated Fulfillment Center">
+              </div>
+
+              <div class="form-group">
+                <label>Physical Address</label>
+                <input type="text" id="wh-address" placeholder="e.g. 500 Enterprise Way, Newark, NJ 07102">
+              </div>
+
+              <button type="submit" class="btn btn-green" style="margin-top: 10px;">
+                <span class="material-symbols-outlined">domain_add</span> Create & Provision Warehouse
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: Safety Stock Thresholds -->
+      <div class="admin-tab-pane" id="tab-thresholds">
+        <div class="glass-card">
+          <div class="glass-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h2><span class="material-symbols-outlined">tune</span> Safety Stock & Reorder Thresholds</h2>
+            <button type="button" class="btn btn-outline btn-sm" id="btn-goto-add-product">
+              <span class="material-symbols-outlined">add</span> Register New SKU
+            </button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>SKU</th>
+                <th class="right">Current Stock</th>
+                <th>Min Safety Threshold</th>
+                <th class="right">Quick Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-thresholds-body">
+              <tr><td colspan="5" class="empty-state">Loading product catalog…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 4: System Audit Log -->
+      <div class="admin-tab-pane" id="tab-audit-logs">
+        <div class="glass-card">
+          <div class="glass-card-header">
+            <h2><span class="material-symbols-outlined">policy</span> Security & QR Scan Audit Stream</h2>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Event Type</th>
+                <th>QR / Code Scanned</th>
+                <th>Result</th>
+                <th>User / Operator</th>
+              </tr>
+            </thead>
+            <tbody id="admin-audit-body">
+              <tr><td colspan="5" class="empty-state">Loading security scan stream…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="/app-bridge.js"></script>
+</body>
+</html>

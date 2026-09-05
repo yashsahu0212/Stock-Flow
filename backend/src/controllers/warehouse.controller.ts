@@ -3,6 +3,15 @@ import { WarehouseService } from '../services/warehouse.service';
 import { sendSuccess } from '../utils/response';
 
 export class WarehouseController {
+  static async create(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const warehouse = await WarehouseService.createWarehouse(req.body);
+      sendSuccess(res, warehouse, 201, 'Warehouse created successfully');
+    } catch (err) {
+      next(err);
+    }
+  }
+
   static async getAll(_req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const warehouses = await WarehouseService.getAllWarehouses();

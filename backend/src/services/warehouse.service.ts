@@ -1,6 +1,60 @@
 import prisma from '../config/db';
 
 export class WarehouseService {
+  static async createWarehouse(data: { code: string; name: string; address?: string; totalCapacity?: number }) {
+    const code = data.code.toUpperCase().trim();
+    const existing = await prisma.warehouse.findUnique({
+      where: { code },
+    });
+
+    if (existing) {
+      const error: any = new Error(`Warehouse with code "${code}" already exists`);
+      error.code = 'WAREHOUSE_EXISTS';
+      error.statusCode = 409;
+      throw error;
+    }
+
+    const warehouse = await prisma.warehouse.create({
+      data: {
+        code,
+        name: data.name.trim(),
+        address: data.address?.trim() || null,
+        rows: {
+          create: [
+            {
+              code: 'R01',
+              bins: {
+                create: [
+                  { code: 'S01', qrCode: `${code}-R01-S01`, zone: 'A', capacity: 100 },
+                  { code: 'S02', qrCode: `${code}-R01-S02`, zone: 'A', capacity: 100 },
+                  { code: 'S03', qrCode: `${code}-R01-S03`, zone: 'A', capacity: 100 },
+                ],
+              },
+            },
+            {
+              code: 'R02',
+              bins: {
+                create: [
+                  { code: 'S01', qrCode: `${code}-R02-S01`, zone: 'B', capacity: 100 },
+                  { code: 'S02', qrCode: `${code}-R02-S02`, zone: 'B', capacity: 100 },
+                ],
+              },
+            },
+          ],
+        },
+      },
+      include: {
+        rows: {
+          include: {
+            bins: true,
+          },
+        },
+      },
+    });
+
+    return warehouse;
+  }
+
   static async getAllWarehouses() {
     const warehouses = await prisma.warehouse.findMany({
       include: {
