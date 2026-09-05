@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockFlow — Warehouse Topology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-navbar">
+    <div class="nav-left">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon">
+          <span class="material-symbols-outlined">inventory_2</span>
+        </div>
+        <div class="brand-name">
+          Stock<span>Flow</span>
+          <span class="brand-pill">OS 2.6</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">
+          <span class="material-symbols-outlined">dashboard</span>
+          Dashboard
+        </a>
+        <a href="/products.html" class="nav-link">
+          <span class="material-symbols-outlined">inventory_2</span>
+          Products
+        </a>
+        <a href="/orders.html" class="nav-link">
+          <span class="material-symbols-outlined">shopping_cart</span>
+          Orders
+        </a>
+        <a href="/movements.html" class="nav-link">
+          <span class="material-symbols-outlined">swap_horiz</span>
+          Movements
+        </a>
+        <a href="/warehouses.html" class="nav-link active">
+          <span class="material-symbols-outlined">warehouse</span>
+          Warehouses
+        </a>
+        <a href="/scanner.html" class="nav-link">
+          <span class="material-symbols-outlined">qr_code_scanner</span>
+          Scanner
+        </a>
+        <a href="/admin.html" class="nav-link">
+          <span class="material-symbols-outlined">admin_panel_settings</span>
+          Admin
+        </a>
+      </nav>
+    </div>
+
+    <div class="nav-right">
+      <div class="db-pill">
+        <div class="db-pill-dot"></div>
+        SYSTEM ONLINE
+      </div>
+      <a href="/movements.html" class="btn btn-green btn-sm">
+        <span class="material-symbols-outlined">swap_horiz</span> Move Units
+      </a>
+    </div>
+  </header>
+
+  <main class="app-container">
+    <section class="hero-section">
+      <div class="hero-text">
+        <h1>Multi-Node Warehouse Topology</h1>
+        <p>Live spatial mapping: Hubs → Row Aisles → Shelf & Bin matrix with unit density</p>
+      </div>
+    </section>
+
+    <!-- Warehouse Grid -->
+    <div class="wh-grid" id="wh-grid">
+      <div class="empty-state">Loading warehouse topology…</div>
+    </div>
+  </main>
+
+  <!-- Shelf Inspection Modal -->
+  <div class="modal-overlay" id="modal-shelf-details">
+    <div class="modal" style="width: 540px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+        <span class="badge badge-green">SPATIAL SHELF NODE</span>
+        <button type="button" class="btn-remove-item" id="btn-close-shelf-modal">✕</button>
+      </div>
+
+      <h2 id="modal-shelf-title" style="margin-bottom: 4px;">Shelf Code</h2>
+      <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;" id="modal-shelf-sub">Warehouse Location</div>
+
+      <div style="background: var(--bg-subtle); border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px; border: 1px solid var(--border-main);">
+        <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 10px;">
+          Products Stored on this Shelf
+        </div>
+        <div id="modal-shelf-products-list">
+          <div class="empty-state">No products stored</div>
+        </div>
+      </div>
+
+      <div class="modal-actions" style="margin-top: 0;">
+        <button type="button" class="btn btn-outline" id="btn-cancel-shelf-modal">Close</button>
+        <a href="/scanner.html" class="btn btn-green" id="modal-shelf-btn-scan">
+          <span class="material-symbols-outlined">qr_code_scanner</span> Open in Scanner
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/app-bridge.js"></script>
+</body>
+</html>

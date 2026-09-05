@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockFlow — Stock Movements Log</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-navbar">
+    <div class="nav-left">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon">
+          <span class="material-symbols-outlined">inventory_2</span>
+        </div>
+        <div class="brand-name">
+          Stock<span>Flow</span>
+          <span class="brand-pill">OS 2.6</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">
+          <span class="material-symbols-outlined">dashboard</span>
+          Dashboard
+        </a>
+        <a href="/products.html" class="nav-link">
+          <span class="material-symbols-outlined">inventory_2</span>
+          Products
+        </a>
+        <a href="/orders.html" class="nav-link">
+          <span class="material-symbols-outlined">shopping_cart</span>
+          Orders
+        </a>
+        <a href="/movements.html" class="nav-link active">
+          <span class="material-symbols-outlined">swap_horiz</span>
+          Movements
+        </a>
+        <a href="/warehouses.html" class="nav-link">
+          <span class="material-symbols-outlined">warehouse</span>
+          Warehouses
+        </a>
+        <a href="/scanner.html" class="nav-link">
+          <span class="material-symbols-outlined">qr_code_scanner</span>
+          Scanner
+        </a>
+        <a href="/admin.html" class="nav-link">
+          <span class="material-symbols-outlined">admin_panel_settings</span>
+          Admin
+        </a>
+      </nav>
+    </div>
+
+    <div class="nav-right">
+      <div class="db-pill">
+        <div class="db-pill-dot"></div>
+        SYSTEM ONLINE
+      </div>
+      <button class="btn btn-green btn-sm" id="btn-new-movement">
+        <span class="material-symbols-outlined">add</span> New Movement
+      </button>
+    </div>
+  </header>
+
+  <main class="app-container">
+    <section class="hero-section">
+      <div class="hero-text">
+        <h1>Stock Movement Stream</h1>
+        <p>Immutable ledger of all inward deliveries, intra-facility transfers, and count adjustments</p>
+      </div>
+      <button class="btn btn-green" onclick="document.getElementById('btn-new-movement').click()">
+        <span class="material-symbols-outlined">add_circle</span> Record Movement
+      </button>
+    </section>
+
+    <!-- Movements Table -->
+    <div class="glass-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Product Name</th>
+            <th>SKU</th>
+            <th>Operation</th>
+            <th class="right">Quantity</th>
+            <th>Route (From → To)</th>
+            <th>Audit Memo</th>
+          </tr>
+        </thead>
+        <tbody id="movements-body">
+          <tr><td colspan="7" class="empty-state">Loading stock movement ledger…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- New Movement Modal -->
+  <div class="modal-overlay" id="movement-modal">
+    <div class="modal">
+      <h2>Record Stock Movement</h2>
+      <div class="tab-bar" id="movement-tabs">
+        <div class="tab active" data-type="inward">Inward (Receive)</div>
+        <div class="tab" data-type="transfer">Transfer (Relocate)</div>
+        <div class="tab" data-type="adjust">Adjust (Audit)</div>
+      </div>
+      <form id="movement-form">
+        <div class="form-group">
+          <label>Product</label>
+          <select id="mv-product" required><option value="">Select product…</option></select>
+        </div>
+        <div class="form-row" id="mv-bin-row">
+          <div class="form-group" id="mv-from-group" style="display:none">
+            <label>Origin Bin (From)</label>
+            <select id="mv-from-bin"><option value="">Select bin…</option></select>
+          </div>
+          <div class="form-group" id="mv-to-group">
+            <label id="mv-to-label">Destination Bin (To)</label>
+            <select id="mv-to-bin" required><option value="">Select bin…</option></select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Quantity</label>
+            <input type="number" id="mv-quantity" min="1" value="1" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Reference Memo</label>
+          <input type="text" id="mv-reason" placeholder="e.g. PO-9843 Inbound Restock">
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" id="btn-cancel-movement">Cancel</button>
+          <button type="submit" class="btn btn-green">Commit Movement</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/app-bridge.js"></script>
+</body>
+</html>
