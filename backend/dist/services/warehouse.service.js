@@ -6,6 +6,56 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WarehouseService = void 0;
 const db_1 = __importDefault(require("../config/db"));
 class WarehouseService {
+    static async createWarehouse(data) {
+        const code = data.code.toUpperCase().trim();
+        const existing = await db_1.default.warehouse.findUnique({
+            where: { code },
+        });
+        if (existing) {
+            const error = new Error(`Warehouse with code "${code}" already exists`);
+            error.code = 'WAREHOUSE_EXISTS';
+            error.statusCode = 409;
+            throw error;
+        }
+        const warehouse = await db_1.default.warehouse.create({
+            data: {
+                code,
+                name: data.name.trim(),
+                address: data.address?.trim() || null,
+                rows: {
+                    create: [
+                        {
+                            code: 'R01',
+                            bins: {
+                                create: [
+                                    { code: 'S01', qrCode: `${code}-R01-S01`, zone: 'A', capacity: 100 },
+                                    { code: 'S02', qrCode: `${code}-R01-S02`, zone: 'A', capacity: 100 },
+                                    { code: 'S03', qrCode: `${code}-R01-S03`, zone: 'A', capacity: 100 },
+                                ],
+                            },
+                        },
+                        {
+                            code: 'R02',
+                            bins: {
+                                create: [
+                                    { code: 'S01', qrCode: `${code}-R02-S01`, zone: 'B', capacity: 100 },
+                                    { code: 'S02', qrCode: `${code}-R02-S02`, zone: 'B', capacity: 100 },
+                                ],
+                            },
+                        },
+                    ],
+                },
+            },
+            include: {
+                rows: {
+                    include: {
+                        bins: true,
+                    },
+                },
+            },
+        });
+        return warehouse;
+    }
     static async getAllWarehouses() {
         const warehouses = await db_1.default.warehouse.findMany({
             include: {

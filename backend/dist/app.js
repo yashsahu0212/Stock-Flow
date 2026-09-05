@@ -38,17 +38,19 @@ if (env_1.config.nodeEnv !== 'test') {
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 const rootDir = path_1.default.resolve(__dirname, '../../');
+const frontendDir = path_1.default.join(rootDir, 'Frontend');
 // HTML delivery middleware with dynamic backend bridge injection
 exports.app.use((req, res, next) => {
     if (req.method === 'GET' && !req.path.startsWith('/api')) {
         let filePath = '';
-        if (req.path === '/' || req.path === '/index.html') {
-            filePath = path_1.default.join(rootDir, 'index.html');
+        const reqFile = (req.path === '/' || req.path === '/index.html') ? 'index.html' : req.path.replace(/^\//, '');
+        if (fs_1.default.existsSync(path_1.default.join(frontendDir, reqFile))) {
+            filePath = path_1.default.join(frontendDir, reqFile);
         }
-        else if (req.path.endsWith('.html')) {
-            filePath = path_1.default.join(rootDir, req.path.replace(/^\//, ''));
+        else if (fs_1.default.existsSync(path_1.default.join(rootDir, reqFile))) {
+            filePath = path_1.default.join(rootDir, reqFile);
         }
-        if (filePath && fs_1.default.existsSync(filePath)) {
+        if (filePath && filePath.endsWith('.html')) {
             let content = fs_1.default.readFileSync(filePath, 'utf-8');
             if (!content.includes('app-bridge.js')) {
                 content = content.replace('</body>', '<script src="/app-bridge.js"></script></body>');
@@ -58,7 +60,8 @@ exports.app.use((req, res, next) => {
     }
     next();
 });
-// Serve static frontend assets and pages
+// Serve static frontend assets and pages from Frontend directory
+exports.app.use(express_1.default.static(frontendDir));
 exports.app.use(express_1.default.static(rootDir));
 // Mount all API routes
 exports.app.use('/api', routes_1.default);

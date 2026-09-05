@@ -4,6 +4,15 @@ exports.WarehouseController = void 0;
 const warehouse_service_1 = require("../services/warehouse.service");
 const response_1 = require("../utils/response");
 class WarehouseController {
+    static async create(req, res, next) {
+        try {
+            const warehouse = await warehouse_service_1.WarehouseService.createWarehouse(req.body);
+            (0, response_1.sendSuccess)(res, warehouse, 201, 'Warehouse created successfully');
+        }
+        catch (err) {
+            next(err);
+        }
+    }
     static async getAll(_req, res, next) {
         try {
             const warehouses = await warehouse_service_1.WarehouseService.getAllWarehouses();
