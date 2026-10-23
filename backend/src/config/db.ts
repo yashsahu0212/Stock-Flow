@@ -10,4 +10,25 @@ export const prisma =
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 
+export const checkDatabaseConnection = async (): Promise<{
+  connected: boolean;
+  latencyMs: number;
+  error?: string;
+}> => {
+  const start = Date.now();
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+    return {
+      connected: true,
+      latencyMs: Date.now() - start,
+    };
+  } catch (error: any) {
+    return {
+      connected: false,
+      latencyMs: Date.now() - start,
+      error: error.message || 'Database connection error',
+    };
+  }
+};
+
 export default prisma;

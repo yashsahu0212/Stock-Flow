@@ -13,12 +13,20 @@ const order_routes_1 = __importDefault(require("./order.routes"));
 const qr_routes_1 = __importDefault(require("./qr.routes"));
 const dashboard_routes_1 = __importDefault(require("./dashboard.routes"));
 const response_1 = require("../utils/response");
+const db_1 = require("../config/db");
 const router = (0, express_1.Router)();
 // Healthcheck
-router.get('/health', (_req, res) => {
+router.get('/health', async (_req, res) => {
+    const dbStatus = await (0, db_1.checkDatabaseConnection)();
     (0, response_1.sendSuccess)(res, {
-        status: 'UP',
+        status: dbStatus.connected ? 'UP' : 'DEGRADED',
         service: 'StockFlow Inventory & Warehouse Tracking Backend',
+        database: {
+            provider: 'Supabase / PostgreSQL',
+            connected: dbStatus.connected,
+            latencyMs: dbStatus.latencyMs,
+            ...(dbStatus.error ? { error: dbStatus.error } : {}),
+        },
         uptimeSeconds: Math.floor(process.uptime()),
         timestamp: new Date().toISOString(),
     });

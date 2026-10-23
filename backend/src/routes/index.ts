@@ -8,14 +8,22 @@ import orderRoutes from './order.routes';
 import qrRoutes from './qr.routes';
 import dashboardRoutes from './dashboard.routes';
 import { sendSuccess } from '../utils/response';
+import { checkDatabaseConnection } from '../config/db';
 
 const router = Router();
 
 // Healthcheck
-router.get('/health', (_req: Request, res: Response) => {
+router.get('/health', async (_req: Request, res: Response) => {
+  const dbStatus = await checkDatabaseConnection();
   sendSuccess(res, {
-    status: 'UP',
+    status: dbStatus.connected ? 'UP' : 'DEGRADED',
     service: 'StockFlow Inventory & Warehouse Tracking Backend',
+    database: {
+      provider: 'Supabase / PostgreSQL',
+      connected: dbStatus.connected,
+      latencyMs: dbStatus.latencyMs,
+      ...(dbStatus.error ? { error: dbStatus.error } : {}),
+    },
     uptimeSeconds: Math.floor(process.uptime()),
     timestamp: new Date().toISOString(),
   });
